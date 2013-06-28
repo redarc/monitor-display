@@ -71,7 +71,6 @@ public class MonitorDisplay {
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
-		             
 		//run curl
 		downloadWeb();
 		
@@ -403,7 +402,8 @@ public class MonitorDisplay {
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
-        	 td.addElement(new br().setTagText(tr_no));
+	       	 String trName = HRParser.heading("HR12396");
+        	 td.addElement(new br().setTagText(tr_no + " " + trName));
         	 i++;
         }
         td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));

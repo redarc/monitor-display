@@ -68,20 +68,6 @@ public class IPadParser {
 	private static String mtGuidelineStyle;
 	private static String mtGuidelineContent;
 
-	/*
-	public static void main(String[] args) throws IOException, InterruptedException{
-		System.out.println("iPad parse start");
-		             
-		//run curl
-		downloadWeb();
-		
-		//snifer web content
-		parseIpad();
-
-	    genertorHtml();
-	    System.out.println("iPad parse end");
-	}
-    */
 	
 	/**
 	 * @throws IOException

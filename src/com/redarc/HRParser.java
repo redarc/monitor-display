@@ -17,7 +17,8 @@ public class HRParser {
 	public HRParser(String hr_no){
 		HRParser.hr_no = hr_no;
 	}
-	public static String heading(){
+	public static String heading(String hr_no){
+		HRParser.hr_no = hr_no;
 		if(downloadWeb(hr_no)){
 			return parseHRNO(LOCAL_SRV + hr_no + ".html");
 		}else{
@@ -33,7 +34,7 @@ public class HRParser {
 				     .userAgent("Mozilla")
 				     .followRedirects(true)
 				     .get();
-			Element heading = doc.getElementById(HEADING_ID);
+			Element heading = doc.getElementById(HEADING_ID).child(0);
 			return heading.text();
 			
 		} catch (IOException e) {
