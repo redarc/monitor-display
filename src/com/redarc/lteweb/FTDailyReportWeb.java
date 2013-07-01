@@ -1,36 +1,41 @@
 package com.redarc.lteweb;
 
-import java.io.IOException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import java.util.List;
+
+import org.apache.ecs.html.Div;
 import org.jsoup.nodes.Element;
 
-import com.redarc.BaseWeb;
+public class FTDailyReportWeb extends ConvertWeb{
 
-public class FTDailyReportWeb extends BaseWeb{
+	public FTDailyReportWeb(String fileName) {
+		super(fileName);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public String build() {
-		String excelContent = null;
-		Document doc;
-		try {
-			doc = Jsoup.connect(LOCAL_SRV + FT_L23_DAILY_TEST_REPORT)
-				     .data("jquery","java")
-				     .userAgent("Mozilla")
-				     .followRedirects(true)
-				     .get();
-			Element t = doc.body().child(0);
-			Element s = doc.head().child(doc.head().children().size()-1);
-			excelContent = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"");
-			excelStyle = s.toString();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public String build(List<String> swapContent) {
+		if(null != this.getDoc()){
+			Element t = this.getDoc().body().child(0);
+			String content = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"");
+			//TODO add div
+	        Div ft_L23_dailyReport = new Div();
+	        ft_L23_dailyReport.addElement(content);
+			swapContent.add(ft_L23_dailyReport.toString());
+			return content;
+		}else{
+			return null;
 		}
-		
-		return excelContent;
+	}
+
+	@Override
+	public String style() {
+		if(null != this.getDoc()){
+			Element s = this.getDoc().head().child(this.getDoc().head().children().size()-1);
+			return s.toString();
+		}else{
+		    return null;
+		}
 	}
 
 }

@@ -29,6 +29,8 @@ import org.apache.ecs.xhtml.br;
 import org.apache.ecs.xhtml.p;
 import org.apache.ecs.xml.XML;
 
+import com.redarc.lteweb.FTDailyReportWeb;
+
 public class WebGenerator {
 	
 	//move to config file
@@ -56,10 +58,6 @@ public class WebGenerator {
 	private static final String MT_DELIVERY_GUIDELINE = "LMR_Main_Track_delivery_guidelines.html"; 
 	private static LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
 	private static LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
-	private static String excelContent;
-	private static String excelStyle;
-	private static String mtGuidelineStyle;
-	private static String mtGuidelineContent;
 	
 	private String filename;
 	private List<String> swapContent = new ArrayList<String>();
@@ -179,199 +177,15 @@ public class WebGenerator {
 		return style;
     } 
     
-    /*
-    private Div buildW1324(){
-		Div w1324 = new Div();
-		w1324.setClass("se_context");
-		w1324.addElement(new H1("L3 PG Reminders-w1324"));
-		w1324.addElement(new H2("LMR delivery Guideline update"));
-		w1324.addElement(new p().setTagText("BT and source coding delivery request diff"));
-		w1324.addElement(new H2("Documentation in RSARTE"));
-		w1324.addElement(new p().setTagText("You will see changes in the environment during the summer"));
-		w1324.addElement(new H2("RAC-COP Meeting Agenda, June 11 2013"));
-		w1324.addElement(new p().setTagText("Purify memory in use"));
-		w1324.addElement(new p().setTagText("Dependency rules"));
-		w1324.addElement(new p().setTagText("What MCT suites that need to be run after a certain change in some code"));
-		w1324.addElement(new H2("Migration from CDM to EriDoc within DURA"));
-		w1324.addElement(new H2("NO TDD support is required for the DUL20&21 platforms from L13B and onwards"));
-		return w1324;
-    }
-    
-    private Div buildL3PGRMD(){
- 		Div l3PGRmd = new Div();
- 		l3PGRmd.setClass("se_context");
- 		l3PGRmd.addElement(new H1("L3 PG Reminders-w22"));
- 		l3PGRmd.addElement(new H2("Atest always green and how to make Atest all green"));
- 		l3PGRmd.addElement(new p().setTagText("Inform \\\"everyone\\\" about the coming \\\"always green main\\\" plan"));
- 		l3PGRmd.addElement(new p().setTagText("Important for everyone to understand this new zero tolerance from the beginning."));
- 		l3PGRmd.addElement(new p().setTagText("RAC & OMF should be considered one."));
- 		l3PGRmd.addElement(new p().setTagText("MOM, 10 CPP are all just deliveries and don\\'t require any special treatment or rules. "));
- 		l3PGRmd.addElement(new p().setTagText("Communicate the plan in advance and when it comes into play"));
- 		l3PGRmd.addElement(new p().setTagText("Secure resources for \\\"atest green on main\\\" activity and fully finish this work to get a good baseline."));
- 		l3PGRmd.addElement(new p().setTagText("Prioritize work with optimizing multiatest (Peter O), ccstream integration and mechanisms for prioritizing delivering teams activities (delivery check, multiatest)."));
- 		
- 		l3PGRmd.addElement(new H2("How to write correct format in the pc_extract.conf"));
- 		l3PGRmd.addElement(new H2("Product DOC Guardians: 3 doc in EQM, 5 doc in RNH, 9 doc in UEH"));
- 		return l3PGRmd;
-     }
-     
-    */
-    private TD buildUPTD(RecUP recUP){
-        TD td = new TD();
-        td.setVAlign("middle");
-        
-        td.addElement(new br().setTagText(recUP.getTitle()));
-        int i = 0;
-        for(String wp_no : recUP.getWp_Set()){
-        	 if( i > RECORD_MAX_NO){
-        		 td.addElement(new br().setTagText("etc."));
-        		 break;
-        	 }
-           	 td.addElement(new br().setTagText(wp_no));
-        	 i++;
-        }
-        
-        i = 0;
-        for(String cr_no : recUP.getCr_Set()){
-	       	 if( i > RECORD_MAX_NO){
-	    		 td.addElement(new br().setTagText("etc."));
-	    		 break;
-	    	 }
-        	 td.addElement(new br().setTagText(cr_no));
-        	 i++;
-        }
-        
-        i = 0;
-        for(String tr_no : recUP.getTr_Set()){
-	       	 if( i > RECORD_MAX_NO){
-	    		 td.addElement(new br().setTagText("etc."));
-	    		 break;
-	    	 }
-        	 td.addElement(new br().setTagText(tr_no));
-        	 i++;
-        }
-        td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
-        return td;
-    }
-    
-    private Div buildTable(List<RecUP> recUP_list__L, String title_L){
-		TH th_L = new TH();
-		th_L.setVAlign("middle");
-		th_L.setTagText(title_L);
-		
-		THead thead = new THead();
-		thead.addElement(new TR().addElement(th_L));
-		
-		TBody tbody = new TBody();
-		
-		//TODO assert recUP_list_R/recUP_list_L size must < RECUP_MAX_NO
-		for(int i=0; i<RECUP_MAX_NO; i++){
-			TD td_L = buildUPTD(recUP_list__L.get(i));
-	        tbody.addElement(new TR().addElement(td_L));
-		}
-		
-		Table table = new Table();
-		table.setClass("track_table");
-		table.addAttribute("cellspacing", "0");
-		table.addAttribute("cellpadding", "0");
-		table.addAttribute("border", "0");
-		table.addElement(thead);
-		table.addElement(tbody);
-		
-		Div track_table_div = new Div();
-		
-		track_table_div.setID("t_odd");
-		track_table_div.addElement(table);
-		return track_table_div;
-    }
-    
-    private Div buildTable(List<RecUP> recUP_list__L, List<RecUP> recUP_list_R, String title_L, String title_R){
-		TH th_L = new TH();
-		th_L.setVAlign("middle");
-		th_L.setTagText(title_L);
-		
-		TH th_R = new TH();
-		th_R.setVAlign("middle");
-		th_R.setTagText(title_R);
-		
-		THead thead = new THead();
-		thead.addElement(new TR().addElement(th_L).addElement(th_R));
-		
-		TBody tbody = new TBody();
-		
-		//TODO assert recUP_list_R/recUP_list_L size must < RECUP_MAX_NO
-		for(int i=0; i<RECUP_MAX_NO; i++){
-			TD td_L = buildUPTD(recUP_list__L.get(i));
-	        TD td_R = buildUPTD(recUP_list_R.get(i));
-	        tbody.addElement(new TR().addElement(td_L).addElement(td_R));
-		}
-		
-		Table table = new Table();
-		table.setClass("track_table");
-		table.addAttribute("cellspacing", "0");
-		table.addAttribute("cellpadding", "0");
-		table.addAttribute("border", "0");
-		table.addElement(thead);
-		table.addElement(tbody);
-		
-		Div track_table_div = new Div();
-		
-		track_table_div.setID("t_even");
-		track_table_div.addElement(table);
-		return track_table_div;
-    }
-    
-    private Div buildFTL23Report(){
-        Div ft_L23_dailyReport = new Div();
-        ft_L23_dailyReport.addElement(excelContent);
-        return ft_L23_dailyReport;
-    }
-    
     public void addSwapWeb(String webContent){
     	swapContent.add("\"" + webContent + "\"");
     }
     
     private Script buildScript(HashMap<String, List<RecUP>> recUP_Map){
-    	Div ft_L23_dailyReport = buildFTL23Report();
-		Div w1324 = buildW1324();
-		Div l3PGRmd = buildL3PGRMD();
-		
-		addSwapWeb()
-	    swapContent.add("\"" + w1324.toString() + "\"");
-	    swapContent.add("\"" + l3PGRmd.toString() + "\"");
-	    swapContent.add("\"" + ft_L23_dailyReport.toString() + "\"");
-	    swapContent.add("\"" + mtGuidelineContent.toString() + "\"");
-	    String preKey = "";
-		if(0 == recUP_Map.size()%2){
-			int i = 0;
-			for (String key : recUP_Map.keySet()){
-				i++;
-				if(0 != i%2 && i != recUP_Map.size()){
-					preKey= key;
-                    continue; 		
-				}else{
-                    Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    //swapContent.add("\"" + div_table.toString() + "\"");
-                    addSwapWeb(div_table.toString());
-				}
-			}
-		}else{
-			int i = 0;
-			for (String key : recUP_Map.keySet()){
-				i++;
-				if(0 != i%2 && i != recUP_Map.size()){
-					preKey= key;
-                    continue; 		
-				}else if(i == recUP_Map.size()){
-					Div div_table = buildTable(recUP_Map.get(key),key);
-					swapContent.add("\"" + div_table.toString() + "\"");
-				}else{
-                    Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
-				}
-			}
-		}
-	    
+	    //BaseWeb web = new IPadWeb(IPadParser.parseIpad(););
+    	BaseWeb web = new FTDailyReportWeb("xxx");
+    	web.build(swapContent);
+    	
 		String scriptContent = "$(function(){" +
 				"$('.live-tile').liveTile({" +
 				"swapBack:'html',"  +
@@ -411,8 +225,9 @@ public class WebGenerator {
 		head.addElement(link);
         head.addElement(script);
         head.addElement(style);
-        head.addElement(excelStyle);
-        head.addElement(mtGuidelineStyle);
+        //TODO style
+        //head.addElement(excelStyle);
+        //head.addElement(mtGuidelineStyle);
 
 		//Body
 		Div liveTile = new Div();

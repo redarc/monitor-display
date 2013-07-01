@@ -1,5 +1,7 @@
 package com.redarc.lteweb;
 
+import java.util.List;
+
 import org.apache.ecs.html.Div;
 import org.apache.ecs.html.H1;
 import org.apache.ecs.html.H2;
@@ -10,7 +12,7 @@ import com.redarc.BaseWeb;
 public class W22Web extends BaseWeb{
 
 	@Override
-	public String build() {
+	public String build(List<String> swapContent) {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
  		l3PGRmd.addElement(new H1("L3 PG Reminders-w22"));
@@ -25,6 +27,7 @@ public class W22Web extends BaseWeb{
  		
  		l3PGRmd.addElement(new H2("How to write correct format in the pc_extract.conf"));
  		l3PGRmd.addElement(new H2("Product DOC Guardians: 3 doc in EQM, 5 doc in RNH, 9 doc in UEH"));
+ 		swapContent.add(l3PGRmd.toString());
  		return l3PGRmd.toString();
 	}
 }
