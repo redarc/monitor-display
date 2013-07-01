@@ -7,18 +7,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.redarc.webfetcher.StreamGobbler;
+
 public class HRParser {
 	private static final String WEBPATH = System.getProperty("user.dir");
 	private static final String MHWEB_URL = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
 	private static final String LOCAL_SRV = "http://10.186.135.173/";
 	private static final String HEADING_ID = "frm_field_heading_j_id_9v_notetextEditMode";
-	private static String hr_no;
 	
-	public HRParser(String hr_no){
-		HRParser.hr_no = hr_no;
+	public HRParser(){
 	}
 	public static String heading(String hr_no){
-		HRParser.hr_no = hr_no;
 		if(downloadWeb(hr_no)){
 			return parseHRNO(LOCAL_SRV + hr_no + ".html");
 		}else{
@@ -34,8 +33,14 @@ public class HRParser {
 				     .userAgent("Mozilla")
 				     .followRedirects(true)
 				     .get();
-			Element heading = doc.getElementById(HEADING_ID).child(0);
-			return heading.text();
+			Element heading = null;
+			if(null != doc)
+			{
+				heading = doc.getElementById(HEADING_ID).child(0);
+				return heading.text();
+			}else{
+				return null;
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -43,6 +48,7 @@ public class HRParser {
 			return null;
 		}
 	}
+	
 	public static boolean downloadWeb(String hr_no){
 		String cmd = "curl -o " + WEBPATH + File.separator + hr_no + ".html" + " -u EGANYAO:Qmm123456 -k " + MHWEB_URL + hr_no;
 		System.out.println(cmd);

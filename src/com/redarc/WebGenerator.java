@@ -7,12 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Div;
@@ -32,16 +28,10 @@ import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
 import org.apache.ecs.xhtml.p;
 import org.apache.ecs.xml.XML;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import com.redarc.webfetcher.StreamGobbler;
-import com.redarc.webfetcher.WebFetcher;
-
-public class IPadParser {
-
+public class WebGenerator {
+	
+	//move to config file
 	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
 		private static final long serialVersionUID = 1L;
 		{
@@ -70,168 +60,29 @@ public class IPadParser {
 	private static String excelStyle;
 	private static String mtGuidelineStyle;
 	private static String mtGuidelineContent;
-
 	
-	/**
-	 * @throws IOException
-	 * @author EGANYAO
-	 * download all webpage by TRACK_URLS_MAP
-	 * @throws InterruptedException 
-	 */
-	public static void downloadWeb() throws IOException, InterruptedException{
-		for(String key : TRACK_URLS_MAP.keySet()){
-			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
-			/*
-			String cmd = "curl -o " + WEBPATH + File.separator + key + ".html" + " -u EGANYAO:Qmm123456 -k " + TRACK_URLS_MAP.get(key);
-			System.out.println(cmd);
-			
-			Process p = Runtime.getRuntime().exec(cmd);
-			StreamGobbler errGobbler = new StreamGobbler(p.getErrorStream(), "ERROR");
-			StreamGobbler outGobbler = new StreamGobbler(p.getInputStream(),"OUTPUT");
-			
-			errGobbler.start();
-			outGobbler.start();
-			p.waitFor();
-			*/
-		}
+	private String filename;
+	private List<String> swapContent = new ArrayList<String>();
+	
+	public WebGenerator(String filename){
+		this.filename = filename;
 	}
 	
-	private static void mappingLocalMap(){
-		for(String key : TRACK_URLS_MAP.keySet()){
-			LOCAL_WEB_PATH.put(key, LOCAL_SRV + key + ".html");
-		}
+	public String build(BaseWeb web){
+		return null;
 	}
 	
-	//TODO refine
-	private static void parseExcelWeb(){
-		Document doc;
-		try {
-			doc = Jsoup.connect(LOCAL_SRV + FT_L23_DAILY_TEST_REPORT)
-				     .data("jquery","java")
-				     .userAgent("Mozilla")
-				     .followRedirects(true)
-				     .get();
-			Element t = doc.body().child(0);
-			Element s = doc.head().child(doc.head().children().size()-1);
-			excelContent = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"");
-			excelStyle = s.toString();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private static void parseMTGuideline(){
-		Document doc;
-		try {
-			doc = Jsoup.connect(LOCAL_SRV + MT_DELIVERY_GUIDELINE)
-				     .data("jquery","java")
-				     .userAgent("Mozilla")
-				     .followRedirects(true)
-				     .get();
-			Element t = doc.body().child(0);
-			Element s = doc.head().child(doc.head().children().size()-1);
-			mtGuidelineContent = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"").replace('\t', ' ').replace('\r',' ');
-			mtGuidelineStyle = s.toString();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void parseIpad() throws IOException{
-		mappingLocalMap();
-		parseExcelWeb();
-		parseMTGuideline();
-		for(String key : LOCAL_WEB_PATH.keySet()) {
-			String url = LOCAL_WEB_PATH.get(key);
-			Document doc = Jsoup.connect(url)
-				     .data("jquery","java")
-				     .userAgent("Mozilla")
-				     .followRedirects(true)
-				     .get();
-			String[] remote_url_segs = TRACK_URLS_MAP.get(key).split("bucket=");
-			int table_key = Integer.parseInt(remote_url_segs[remote_url_segs.length -1]); 
-			
-			String tableFormat = "table#up_table_%d td:nth-child(%d)";
-					
-			Elements up_list = doc.select(String.format(tableFormat, table_key,1));
-			Elements time_list = doc.select(String.format(tableFormat, table_key,2));
-			Elements isRec_list = doc.select(String.format(tableFormat, table_key,3));
-			Elements comments_list = doc.select(String.format(tableFormat, table_key,7));
-			
-			int i = 0;
-			int recCount = 0;
-			List<RecUP> recUP_list = new ArrayList<RecUP>();
-			for(Element rec : isRec_list){
-				if(rec.text().equals("Yes")){
-					RecUP recUP = upContentSniffer(up_list.get(i).text(), time_list.get(i).text(),comments_list.get(i).text(),key);
-					recUP_list.add(recUP);
-					recCount++;
-					if(RECUP_MAX_NO == recCount){
-						break;
-					}
-				}
-				i++;
-			}
-			recUP_Map.put(key,recUP_list);
-		}
-	}
-	
-	private static RecUP upContentSniffer(String upName, String time, String comments,String track){
-		//filter duplicate data
-		Set<String> trSet = new HashSet<String>();
-		Set<String> wpSet = new HashSet<String>();
-		Set<String> crSet = new HashSet<String>();
-		String sysconst = "";
-		
-		Pattern pattern = Pattern.compile("(H[Q-Z]\\d+)|(WP\\d+)|(CR\\d+)|(PA\\d+)",Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(comments);
-		while(matcher.find()){
-			String tr_no = matcher.group(1);
-			if(null != tr_no){
-				trSet.add(tr_no);
-			}
-			
-			String wp_no = matcher.group(2);
-			if(null != wp_no){
-				wpSet.add(wp_no);
-			}
-			
-			String cr_no = matcher.group(3);
-			if(null != cr_no){
-				crSet.add(cr_no);
-			}
-			
-			String sysconst_no = matcher.group(4);
-			if(null != sysconst_no){
-				sysconst = sysconst_no;
-			}
-		}
-		RecUP recUP = new RecUP();
-		recUP.setCr_Set(crSet);
-		recUP.setTr_Set(trSet);
-		recUP.setWp_Set(wpSet);
-		recUP.setTitle(upName + "_" + sysconst + "_" + time);
-		recUP.setTrack(track);
-		recUP.setTime(time);
-		recUP.setSysConstVer(sysconst);
-
-		return recUP;
-	}
-	////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 * @param pathName
 	 * @param html
 	 */
-    public static void genertorHtml(){
-		writeToFile(WEBPATH + File.separator + WEBNAME, builderWeb(recUP_Map));
+    public void genertorHtml(){
+		writeToFile(WEBPATH + File.separator + filename, builderWeb(recUP_Map));
 		//writeToFile(WEBPATH + WEBNAME, builderWeb(recUP_Map));
     }
 
-    private static void writeToFile(String pathName, String html){
+    private void writeToFile(String pathName, String html){
     	File file = new File(pathName);
     	BufferedReader br = null;
     	BufferedWriter bw = null;
@@ -284,7 +135,7 @@ public class IPadParser {
              }
         }
     }
-    private static XML buildCCS(){
+    private XML buildCCS(){
 		String styleContent = new String("" +
 				"div#wholePage{}" +
 				"div#header{height: 0px}"+
@@ -328,7 +179,8 @@ public class IPadParser {
 		return style;
     } 
     
-    private static Div buildW1324(){
+    /*
+    private Div buildW1324(){
 		Div w1324 = new Div();
 		w1324.setClass("se_context");
 		w1324.addElement(new H1("L3 PG Reminders-w1324"));
@@ -345,7 +197,7 @@ public class IPadParser {
 		return w1324;
     }
     
-    private static Div buildL3PGRMD(){
+    private Div buildL3PGRMD(){
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
  		l3PGRmd.addElement(new H1("L3 PG Reminders-w22"));
@@ -363,8 +215,8 @@ public class IPadParser {
  		return l3PGRmd;
      }
      
-    
-    private static TD buildUPTD(RecUP recUP){
+    */
+    private TD buildUPTD(RecUP recUP){
         TD td = new TD();
         td.setVAlign("middle");
         
@@ -402,7 +254,7 @@ public class IPadParser {
         return td;
     }
     
-    private static Div buildTable(List<RecUP> recUP_list__L, String title_L){
+    private Div buildTable(List<RecUP> recUP_list__L, String title_L){
 		TH th_L = new TH();
 		th_L.setVAlign("middle");
 		th_L.setTagText(title_L);
@@ -433,7 +285,7 @@ public class IPadParser {
 		return track_table_div;
     }
     
-    private static Div buildTable(List<RecUP> recUP_list__L, List<RecUP> recUP_list_R, String title_L, String title_R){
+    private Div buildTable(List<RecUP> recUP_list__L, List<RecUP> recUP_list_R, String title_L, String title_R){
 		TH th_L = new TH();
 		th_L.setVAlign("middle");
 		th_L.setTagText(title_L);
@@ -469,17 +321,22 @@ public class IPadParser {
 		return track_table_div;
     }
     
-    private static Div buildFTL23Report(){
+    private Div buildFTL23Report(){
         Div ft_L23_dailyReport = new Div();
         ft_L23_dailyReport.addElement(excelContent);
         return ft_L23_dailyReport;
     }
     
-    private static Script buildScript(HashMap<String, List<RecUP>> recUP_Map){
+    public void addSwapWeb(String webContent){
+    	swapContent.add("\"" + webContent + "\"");
+    }
+    
+    private Script buildScript(HashMap<String, List<RecUP>> recUP_Map){
     	Div ft_L23_dailyReport = buildFTL23Report();
 		Div w1324 = buildW1324();
 		Div l3PGRmd = buildL3PGRMD();
-	    List<String> swapContent = new ArrayList<String>();
+		
+		addSwapWeb()
 	    swapContent.add("\"" + w1324.toString() + "\"");
 	    swapContent.add("\"" + l3PGRmd.toString() + "\"");
 	    swapContent.add("\"" + ft_L23_dailyReport.toString() + "\"");
@@ -494,7 +351,8 @@ public class IPadParser {
                     continue; 		
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
+                    //swapContent.add("\"" + div_table.toString() + "\"");
+                    addSwapWeb(div_table.toString());
 				}
 			}
 		}else{
@@ -532,7 +390,7 @@ public class IPadParser {
 		return script;
     } 
     
-    private static String builderWeb(HashMap<String, List<RecUP>> recUP_Map){
+    private String builderWeb(HashMap<String, List<RecUP>> recUP_Map){
 		Link link = new Link();
 		link.addAttribute("href", "../MetroJS/MetroJs.css");
 		link.addAttribute("type", "text/css");
@@ -574,5 +432,4 @@ public class IPadParser {
 	    
 	    return html.toString();
     }
-
 }

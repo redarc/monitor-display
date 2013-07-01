@@ -1,4 +1,4 @@
-package com.redarc;
+package com.redarc.webfetcher;
 
 import java.io.BufferedReader;
 import java.io.IOException;

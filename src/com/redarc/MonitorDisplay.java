@@ -38,6 +38,8 @@ import org.apache.ecs.xhtml.br;
 import org.apache.ecs.xhtml.p;
 import org.apache.ecs.xml.XML;
 
+import com.redarc.webfetcher.StreamGobbler;
+
 public class MonitorDisplay {
 	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
 		private static final long serialVersionUID = 1L;
@@ -71,6 +73,7 @@ public class MonitorDisplay {
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
+		
 		//run curl
 		downloadWeb();
 		
@@ -141,7 +144,7 @@ public class MonitorDisplay {
 			mtGuidelineContent = t.first().toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"").replace('\t', ' ').replace('\r',' ');
 			mtGuidelineStyle = s.toString();
 			
-			System.out.println(mtGuidelineContent);
+			//System.out.println(mtGuidelineContent);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -402,7 +405,7 @@ public class MonitorDisplay {
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
-	       	 String trName = HRParser.heading("HR12396");
+	       	 String trName = HRParser.heading(tr_no);
         	 td.addElement(new br().setTagText(tr_no + " " + trName));
         	 i++;
         }
