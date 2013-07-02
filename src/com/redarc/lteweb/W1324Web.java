@@ -1,5 +1,6 @@
 package com.redarc.lteweb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ecs.html.Div;
@@ -11,8 +12,10 @@ import com.redarc.BaseWeb;
 
 public class W1324Web extends BaseWeb{
 
+	public W1324Web(){}
+	
 	@Override
-	public String build(List<String> swapContent) {
+	public List<String> build() {
 		// TODO Auto-generated method stub
 		Div w1324 = new Div();
 		w1324.setClass("se_context");
@@ -27,7 +30,15 @@ public class W1324Web extends BaseWeb{
 		w1324.addElement(new p().setTagText("What MCT suites that need to be run after a certain change in some code"));
 		w1324.addElement(new H2("Migration from CDM to EriDoc within DURA"));
 		w1324.addElement(new H2("NO TDD support is required for the DUL20&21 platforms from L13B and onwards"));
-		swapContent.add(w1324.toString());
-		return w1324.toString();
+		
+		List<String> ret = new ArrayList<String>();
+		ret.add(w1324.toString());
+		return ret;
+	}
+
+	@Override
+	public String style() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

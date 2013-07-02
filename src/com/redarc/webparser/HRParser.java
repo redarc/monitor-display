@@ -1,4 +1,4 @@
-package com.redarc;
+package com.redarc.webparser;
 
 import java.io.File;
 import java.io.IOException;

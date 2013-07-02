@@ -1,12 +1,10 @@
 package com.redarc.lteweb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.ecs.html.Div;
-import org.apache.ecs.html.Script;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -16,8 +14,9 @@ import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
 
 import com.redarc.BaseWeb;
-import com.redarc.HRParser;
 import com.redarc.RecUP;
+import com.redarc.webparser.HRParser;
+import com.redarc.webparser.IPadParser;
 
 public class IPadWeb extends BaseWeb{
 	
@@ -25,10 +24,12 @@ public class IPadWeb extends BaseWeb{
 	private final int RECORD_MAX_NO = 5;
 	private final int RECUP_MAX_NO = 3;
 	
-	public IPadWeb(LinkedHashMap<String, List<RecUP>> recUP_Map){
-		this.recUP_Map = recUP_Map;
+	public IPadWeb(IPadParser iPadParser){
+		this.recUP_Map = iPadParser.parseIpad();
 	}
-	public String build(List<String> swapContent){
+	
+	public List<String> build(){
+		List<String> ret = new ArrayList<String>();
 		String preKey = null;
 		if(0 == recUP_Map.size() % 2){
 			int i = 0;
@@ -39,7 +40,7 @@ public class IPadWeb extends BaseWeb{
                     continue; 		
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
+                    ret.add("\"" + div_table.toString() + "\"");
 				}
 			}
 		}else{
@@ -51,17 +52,16 @@ public class IPadWeb extends BaseWeb{
                     continue; 		
 				}else if(i == recUP_Map.size()){
 					Div div_table = buildTable(recUP_Map.get(key),key);
-					swapContent.add("\"" + div_table.toString() + "\"");
+					ret.add("\"" + div_table.toString() + "\"");
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
+                    ret.add("\"" + div_table.toString() + "\"");
 				}
 			}
 		}
-		return null;
+		return ret;
 	}
 	
-    
     private TD buildUPTD(RecUP recUP){
         TD td = new TD();
         td.setVAlign("middle");
@@ -167,4 +167,10 @@ public class IPadWeb extends BaseWeb{
 		track_table_div.addElement(table);
 		return track_table_div;
     }
+
+	@Override
+	public String style() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

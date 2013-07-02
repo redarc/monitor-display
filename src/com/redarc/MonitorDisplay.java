@@ -2,42 +2,33 @@ package com.redarc;
 
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 
-import com.redarc.webfetcher.StreamGobbler;
-import com.redarc.webfetcher.WebFetcher;
+import com.redarc.lteweb.FTDailyReportWeb;
+import com.redarc.lteweb.IPadWeb;
+import com.redarc.lteweb.MTDeliveryGuidelineWeb;
+import com.redarc.lteweb.W1324Web;
+import com.redarc.lteweb.W22Web;
+import com.redarc.webparser.IPadParser;
 
 public class MonitorDisplay {
-	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
-		private static final long serialVersionUID = 1L;
-		{
-			put("FT_88_4_4","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846");
-			put("FT_88_4_5","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830");
-			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
-		}
-	};
-	
-	private static final String WEBPATH = System.getProperty("user.dir");
-	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
 		
-		downloadWeb();
+		IPadWeb ipadWeb = new IPadWeb(new IPadParser());
+		FTDailyReportWeb ftDailyReportWeb = new FTDailyReportWeb("xxxx");
+		MTDeliveryGuidelineWeb mtDeliveryGuidelineWeb = new MTDeliveryGuidelineWeb("xxx");
+		W22Web w22Web = new W22Web();
+		W1324Web w1324Web = new W1324Web();
 		
-		IPadParser.parseIpad();
+		WebGenerator webGen = new WebGenerator("xxxxxxxxxx");
+		webGen.addWeblist(ipadWeb);
+		webGen.addWeblist(ftDailyReportWeb);
+		webGen.addWeblist(mtDeliveryGuidelineWeb);
+		webGen.addWeblist(w22Web);
+		webGen.addWeblist(w1324Web);
+		
+		webGen.genertorHtml();
 
 	    System.out.println("iPad parse end");
-	}
-
-	/**
-	 * @throws IOException
-	 * @author EGANYAO
-	 * download all webpage by TRACK_URLS_MAP
-	 * @throws InterruptedException 
-	 */
-	public static void downloadWeb() throws IOException, InterruptedException{
-		for(String key : TRACK_URLS_MAP.keySet()){
-			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
-		}
 	}
 }

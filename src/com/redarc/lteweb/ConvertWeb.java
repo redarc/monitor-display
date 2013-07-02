@@ -34,7 +34,7 @@ public abstract class ConvertWeb extends BaseWeb {
 		this.doc = doc;
 	}
 	
-	abstract public String build(List<String> swapContent);
+	abstract public List<String> build();
 	abstract public String style();
 
 }
