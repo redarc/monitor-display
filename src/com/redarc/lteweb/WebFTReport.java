@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.ecs.html.Div;
 import org.jsoup.nodes.Element;
 
-public class FTDailyReportWeb extends ConvertWeb{
+public class WebFTReport extends ConvertWeb{
 
-	public FTDailyReportWeb(String fileName) {
+	public WebFTReport(String fileName) {
 		super(fileName);
 	}
 
@@ -17,7 +17,7 @@ public class FTDailyReportWeb extends ConvertWeb{
 	public List<String> build() {
 		if(null != this.getDoc()){
 			Element t = this.getDoc().body().child(0);
-			String content = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"");
+			String content = t.toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"").replace('\t', ' ').replace('\r',' ');
 			//TODO add div
 	        Div ft_L23_dailyReport = new Div();
 	        ft_L23_dailyReport.addElement(content);

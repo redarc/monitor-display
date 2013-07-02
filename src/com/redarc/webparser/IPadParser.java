@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.redarc.MonitorDisplay;
 import com.redarc.RecUP;
 import com.redarc.webfetcher.WebFetcher;
 
@@ -26,7 +27,6 @@ public class IPadParser {
 			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
 		}
 	};
-	private static final String LOCAL_SRV = "http://10.186.135.173/";
 	private static int RECUP_MAX_NO = 3;
 	private static LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
 	private static LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
@@ -47,7 +47,7 @@ public class IPadParser {
 	
 	private void mappingLocalMap(){
 		for(String key : TRACK_URLS_MAP.keySet()){
-			LOCAL_WEB_PATH.put(key, LOCAL_SRV + key + ".html");
+			LOCAL_WEB_PATH.put(key, MonitorDisplay.LOCAL_SRV + key + ".html");
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class IPadParser {
 	 * 
 	 */
 	public LinkedHashMap<String, List<RecUP>>  parseIpad(){
-		downloadWeb();
+		//downloadWeb();
 		mappingLocalMap();
 		for(String key : LOCAL_WEB_PATH.keySet()) {
 			String url = LOCAL_WEB_PATH.get(key);

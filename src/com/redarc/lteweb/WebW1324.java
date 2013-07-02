@@ -10,13 +10,12 @@ import org.apache.ecs.xhtml.p;
 
 import com.redarc.BaseWeb;
 
-public class W1324Web extends BaseWeb{
+public class WebW1324 extends BaseWeb{
 
-	public W1324Web(){}
+	public WebW1324(){}
 	
 	@Override
 	public List<String> build() {
-		// TODO Auto-generated method stub
 		Div w1324 = new Div();
 		w1324.setClass("se_context");
 		w1324.addElement(new H1("L3 PG Reminders-w1324"));

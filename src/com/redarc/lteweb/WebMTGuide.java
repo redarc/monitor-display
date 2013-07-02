@@ -7,9 +7,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-public class MTDeliveryGuidelineWeb extends ConvertWeb {
+public class WebMTGuide extends ConvertWeb {
 
-	public MTDeliveryGuidelineWeb(String fileName) {
+	public WebMTGuide(String fileName) {
 		super(fileName);
 	}
 

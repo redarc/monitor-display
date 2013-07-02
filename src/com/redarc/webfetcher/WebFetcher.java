@@ -3,15 +3,13 @@ package com.redarc.webfetcher;
 import java.io.File;
 import java.io.IOException;
 
+import com.redarc.MonitorDisplay;
+
 
 public class WebFetcher {
 
-	//TODO move to a config file
-	private static final String WEBPATH = System.getProperty("user.dir");
-	//private static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
-	
 	public static boolean download(String des_file_name, String url){
-		String cmd = "curl -o " + WEBPATH + File.separator + des_file_name + ".html " + "-u EGANYAO:Qmm123456 -k " + url;
+		String cmd = "curl -o " + MonitorDisplay.WEBPATH + File.separator + des_file_name + ".html " + "-u EGANYAO:Qmm123456 -k " + url;
 		System.out.println(cmd);
 		
 		Process p = null;

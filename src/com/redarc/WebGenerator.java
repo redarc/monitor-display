@@ -22,9 +22,6 @@ import com.redarc.webparser.IPadParser;
 public class WebGenerator {
 	
 	//move to config file
-	//private static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
-	private static final String WEBPATH = System.getProperty("user.dir");
-
 	private static final Integer DELAY_TIME = 5000;//ms
 	private static final Integer SWAP_TIME = 2000;//ms
 	private static final Integer REFRESH_TIME = (IPadParser.TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
@@ -42,7 +39,7 @@ public class WebGenerator {
 	 * @param html
 	 */
     public void genertorHtml(){
-		writeToFile(WEBPATH + File.separator + filename, builderWeb());
+		writeToFile(MonitorDisplay.WEBPATH /*+ File.separator*/ + filename, builderWeb());
     }
 
     private void writeToFile(String pathName, String html){

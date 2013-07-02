@@ -3,29 +3,34 @@ package com.redarc;
 
 import java.io.IOException;
 
-import com.redarc.lteweb.FTDailyReportWeb;
-import com.redarc.lteweb.IPadWeb;
-import com.redarc.lteweb.MTDeliveryGuidelineWeb;
-import com.redarc.lteweb.W1324Web;
-import com.redarc.lteweb.W22Web;
+import com.redarc.lteweb.WebFTReport;
+import com.redarc.lteweb.WebIPad;
+import com.redarc.lteweb.WebMTGuide;
+import com.redarc.lteweb.WebW1324;
+import com.redarc.lteweb.WebW22;
 import com.redarc.webparser.IPadParser;
 
 public class MonitorDisplay {
+	
+	public static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
+	//public static final String WEBPATH = System.getProperties("user.dir");
+	public static final String LOCAL_SRV = "http://10.186.135.173/";
+	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
 		
-		IPadWeb ipadWeb = new IPadWeb(new IPadParser());
-		FTDailyReportWeb ftDailyReportWeb = new FTDailyReportWeb("xxxx");
-		MTDeliveryGuidelineWeb mtDeliveryGuidelineWeb = new MTDeliveryGuidelineWeb("xxx");
-		W22Web w22Web = new W22Web();
-		W1324Web w1324Web = new W1324Web();
+		WebIPad ipadWeb = new WebIPad(new IPadParser());
+		WebW22 w22 = new WebW22();
+		WebW1324 w1324 = new WebW1324();
+		WebFTReport ftReport = new WebFTReport("FT_L23_DAILY_REPORT.html");
+		WebMTGuide mtGuide = new WebMTGuide("LMR_Main_Track_delivery_guidelines.html");
 		
-		WebGenerator webGen = new WebGenerator("xxxxxxxxxx");
+		WebGenerator webGen = new WebGenerator("redarc.html");
 		webGen.addWeblist(ipadWeb);
-		webGen.addWeblist(ftDailyReportWeb);
-		webGen.addWeblist(mtDeliveryGuidelineWeb);
-		webGen.addWeblist(w22Web);
-		webGen.addWeblist(w1324Web);
+		webGen.addWeblist(ftReport);
+		webGen.addWeblist(mtGuide);
+		webGen.addWeblist(w22);
+		webGen.addWeblist(w1324);
 		
 		webGen.genertorHtml();
 

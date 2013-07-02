@@ -10,9 +10,9 @@ import org.apache.ecs.xhtml.p;
 
 import com.redarc.BaseWeb;
 
-public class W22Web extends BaseWeb{
+public class WebW22 extends BaseWeb{
 
-	public W22Web(){}
+	public WebW22(){}
 	
 	@Override
 	public List<String> build() {
