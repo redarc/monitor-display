@@ -13,7 +13,7 @@ import com.redarc.webparser.IPadParser;
 public class MonitorDisplay {
 	
 	//public static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
-	public static final String WEBPATH = System.getProperties("user.dir");
+	public static final String WEBPATH = System.getProperty("user.dir");
 	public static final String LOCAL_SRV = "http://10.186.135.173/";
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
