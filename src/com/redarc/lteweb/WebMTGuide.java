@@ -1,24 +1,26 @@
 package com.redarc.lteweb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class MTDeliveryGuidelineWeb extends ConvertWeb {
 
-	public MTDeliveryGuidelineWeb(String fileName) {
+public class WebMTGuide extends ConvertWeb {
+
+	public WebMTGuide(String fileName) {
 		super(fileName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public String build(List<String> swapContent) {
+	public List<String> build() {
 		if(null != this.getDoc()){
 			Elements t = this.getDoc().body().getElementsByClass("Section1");
 			String content = t.first().toString().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"").replace('\t', ' ').replace('\r',' ');
-			swapContent.add(content);
-			return content;
+			List<String> ret = new ArrayList<String>();
+			ret .add(content);
+			return ret;
 		}else{
 			return null;
 		}

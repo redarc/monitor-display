@@ -1,12 +1,10 @@
 package com.redarc.lteweb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.ecs.html.Div;
-import org.apache.ecs.html.Script;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -16,19 +14,21 @@ import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
 
 import com.redarc.BaseWeb;
-import com.redarc.HRParser;
 import com.redarc.RecUP;
+import com.redarc.webparser.HRParser;
+import com.redarc.webparser.IPadParser;
 
-public class IPadWeb extends BaseWeb{
+public class WebIPad extends BaseWeb{
 	
 	private LinkedHashMap<String, List<RecUP>> recUP_Map;
-	private final int RECORD_MAX_NO = 5;
-	private final int RECUP_MAX_NO = 3;
+	private final int REC_RD_MAX_COUNT = 5;
 	
-	public IPadWeb(LinkedHashMap<String, List<RecUP>> recUP_Map){
-		this.recUP_Map = recUP_Map;
+	public WebIPad(IPadParser iPadParser){
+		this.recUP_Map = iPadParser.parseIpad();
 	}
-	public String build(List<String> swapContent){
+	
+	public List<String> build(){
+		List<String> ret = new ArrayList<String>();
 		String preKey = null;
 		if(0 == recUP_Map.size() % 2){
 			int i = 0;
@@ -39,7 +39,8 @@ public class IPadWeb extends BaseWeb{
                     continue; 		
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
+                    //ret.add("\"" + div_table.toString() + "\"");
+                    ret.add(div_table.toString());
 				}
 			}
 		}else{
@@ -51,17 +52,18 @@ public class IPadWeb extends BaseWeb{
                     continue; 		
 				}else if(i == recUP_Map.size()){
 					Div div_table = buildTable(recUP_Map.get(key),key);
-					swapContent.add("\"" + div_table.toString() + "\"");
+					ret.add(div_table.toString());
+					//ret.add("\"" + div_table.toString() + "\"");
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    swapContent.add("\"" + div_table.toString() + "\"");
+                    ret.add(div_table.toString());
+                    //ret.add("\"" + div_table.toString() + "\"");
 				}
 			}
 		}
-		return null;
+		return ret;
 	}
 	
-    
     private TD buildUPTD(RecUP recUP){
         TD td = new TD();
         td.setVAlign("middle");
@@ -69,7 +71,7 @@ public class IPadWeb extends BaseWeb{
         td.addElement(new br().setTagText(recUP.getTitle()));
         int i = 0;
         for(String wp_no : recUP.getWp_Set()){
-        	 if( i > RECORD_MAX_NO){
+        	 if( i > REC_RD_MAX_COUNT){
         		 td.addElement(new br().setTagText("etc."));
         		 break;
         	 }
@@ -79,7 +81,7 @@ public class IPadWeb extends BaseWeb{
         
         i = 0;
         for(String cr_no : recUP.getCr_Set()){
-	       	 if( i > RECORD_MAX_NO){
+	       	 if( i > REC_RD_MAX_COUNT){
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
@@ -89,13 +91,14 @@ public class IPadWeb extends BaseWeb{
         
         i = 0;
         for(String tr_no : recUP.getTr_Set()){
-	       	 if( i > RECORD_MAX_NO){
+	       	 if( i > REC_RD_MAX_COUNT){
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
-	       	 String trName = HRParser.heading(tr_no);
-        	 td.addElement(new br().setTagText(tr_no + " " + trName));
-        	 i++;
+//	       	 String trName = HRParser.heading(tr_no);
+//        	 td.addElement(new br().setTagText(tr_no + " " + trName));
+	       	td.addElement(new br().setTagText(tr_no));
+        	i++;
         }
         td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
         return td;
@@ -111,8 +114,7 @@ public class IPadWeb extends BaseWeb{
 		
 		TBody tbody = new TBody();
 		
-		//TODO assert recUP_list_R/recUP_list_L size must < RECUP_MAX_NO
-		for(int i=0; i<RECUP_MAX_NO; i++){
+		for(int i=0; i<recUP_list__L.size(); i++){
 			TD td_L = buildUPTD(recUP_list__L.get(i));
 	        tbody.addElement(new TR().addElement(td_L));
 		}
@@ -146,8 +148,7 @@ public class IPadWeb extends BaseWeb{
 		
 		TBody tbody = new TBody();
 		
-		//TODO assert recUP_list_R/recUP_list_L size must < RECUP_MAX_NO
-		for(int i=0; i<RECUP_MAX_NO; i++){
+		for(int i=0; i<recUP_list__L.size(); i++){
 			TD td_L = buildUPTD(recUP_list__L.get(i));
 	        TD td_R = buildUPTD(recUP_list_R.get(i));
 	        tbody.addElement(new TR().addElement(td_L).addElement(td_R));
@@ -167,4 +168,10 @@ public class IPadWeb extends BaseWeb{
 		track_table_div.addElement(table);
 		return track_table_div;
     }
+
+	@Override
+	public String style() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

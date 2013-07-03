@@ -7,14 +7,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.redarc.BaseWeb;
+import com.redarc.MonitorDisplay;
 
 public abstract class ConvertWeb extends BaseWeb {
-	public final String LOCAL_SRV = "http://10.186.135.174";
 	private Document doc; 
-	
 	public ConvertWeb(String fileName){
 		try {
-			setDoc(Jsoup.connect(LOCAL_SRV + fileName)
+			setDoc(Jsoup.connect(MonitorDisplay.LOCAL_SRV + fileName)
 				     .data("jquery","java")
 				     .userAgent("Mozilla")
 				     .followRedirects(true)
@@ -24,7 +23,6 @@ public abstract class ConvertWeb extends BaseWeb {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public Document getDoc() {
@@ -34,7 +32,7 @@ public abstract class ConvertWeb extends BaseWeb {
 		this.doc = doc;
 	}
 	
-	abstract public String build(List<String> swapContent);
+	abstract public List<String> build();
 	abstract public String style();
 
 }

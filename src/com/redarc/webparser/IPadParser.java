@@ -1,12 +1,7 @@
-package com.redarc;
+package com.redarc.webparser;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,35 +9,17 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.ecs.html.Body;
-import org.apache.ecs.html.Div;
-import org.apache.ecs.html.H1;
-import org.apache.ecs.html.H2;
-import org.apache.ecs.html.Head;
-import org.apache.ecs.html.Html;
-import org.apache.ecs.html.Link;
-import org.apache.ecs.html.Meta;
-import org.apache.ecs.html.Script;
-import org.apache.ecs.html.TBody;
-import org.apache.ecs.html.TD;
-import org.apache.ecs.html.TH;
-import org.apache.ecs.html.THead;
-import org.apache.ecs.html.TR;
-import org.apache.ecs.html.Table;
-import org.apache.ecs.xhtml.br;
-import org.apache.ecs.xhtml.p;
-import org.apache.ecs.xml.XML;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.redarc.webfetcher.StreamGobbler;
+import com.redarc.MonitorDisplay;
+import com.redarc.RecUP;
 import com.redarc.webfetcher.WebFetcher;
 
 public class IPadParser {
-
-	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
+	public static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
 		private static final long serialVersionUID = 1L;
 		{
 			put("FT_88_4_4","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846");
@@ -50,21 +27,11 @@ public class IPadParser {
 			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
 		}
 	};
-	
-	private static final String WEBPATH = System.getProperty("user.dir");
-	//private static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
-	private static final Integer DELAY_TIME = 5000;//ms
-	private static final Integer SWAP_TIME = 2000;//ms
-	private static final Integer REFRESH_TIME = (TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
-	
-	private static final String WEBNAME = "iPadUPStatus.html";
-	private static final String LOCAL_SRV = "http://10.186.135.173/";
 	private static int RECUP_MAX_NO = 3;
-	private static final String FT_L23_DAILY_TEST_REPORT = "FT_L23_DAILY_REPORT.html"; 
-	private static final String MT_DELIVERY_GUIDELINE = "LMR_Main_Track_delivery_guidelines.html"; 
 	private static LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
 	private static LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
-
+	
+	public IPadParser(){}
 	
 	/**
 	 * @throws IOException
@@ -72,27 +39,37 @@ public class IPadParser {
 	 * download all webpage by TRACK_URLS_MAP
 	 * @throws InterruptedException 
 	 */
-	public static void downloadWeb() throws IOException, InterruptedException{
+	public void downloadWeb(){
 		for(String key : TRACK_URLS_MAP.keySet()){
 			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
 		}
 	}
 	
-	private static void mappingLocalMap(){
+	private void mappingLocalMap(){
 		for(String key : TRACK_URLS_MAP.keySet()){
-			LOCAL_WEB_PATH.put(key, LOCAL_SRV + key + ".html");
+			LOCAL_WEB_PATH.put(key, MonitorDisplay.LOCAL_SRV + key + ".html");
 		}
 	}
-		
-	public static void parseIpad() throws IOException{
+	
+	/**
+	 * 
+	 */
+	public LinkedHashMap<String, List<RecUP>>  parseIpad(){
+		//downloadWeb();
 		mappingLocalMap();
 		for(String key : LOCAL_WEB_PATH.keySet()) {
 			String url = LOCAL_WEB_PATH.get(key);
-			Document doc = Jsoup.connect(url)
-				     .data("jquery","java")
-				     .userAgent("Mozilla")
-				     .followRedirects(true)
-				     .get();
+			Document doc = null;
+			try {
+				doc = Jsoup.connect(url)
+					     .data("jquery","java")
+					     .userAgent("Mozilla")
+					     .followRedirects(true)
+					     .get();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String[] remote_url_segs = TRACK_URLS_MAP.get(key).split("bucket=");
 			int table_key = Integer.parseInt(remote_url_segs[remote_url_segs.length -1]); 
 			
@@ -119,9 +96,19 @@ public class IPadParser {
 			}
 			recUP_Map.put(key,recUP_list);
 		}
+		return recUP_Map;
 	}
 	
-	private static RecUP upContentSniffer(String upName, String time, String comments,String track){
+	/**
+	 * 
+	 * @param upName
+	 * @param time
+	 * @param comments
+	 * @param track
+	 * UP content sniffer
+	 * @return
+	 */
+	private RecUP upContentSniffer(String upName, String time, String comments,String track){
 		//filter duplicate data
 		Set<String> trSet = new HashSet<String>();
 		Set<String> wpSet = new HashSet<String>();

@@ -10,6 +10,7 @@ public class RecUP {
 	private Set<String> wp_set;
 	private Set<String> tr_set;
 	private Set<String> cr_set;
+	private Set<String> trHead_set;
 	
 	public String getTrack() {
 		return track;
@@ -69,5 +70,14 @@ public class RecUP {
 	
 	public void addCr_Set(String cr) {
 		this.cr_set.add(cr);
+	}
+	public Set<String> getTrHead_set() {
+		return trHead_set;
+	}
+	public void setTrHead_Set(Set<String> trHead_set) {
+		this.trHead_set = trHead_set;
+	}
+	public void addTrHead_set(String trHead) {
+		this.trHead_set.add(trHead);
 	}
 }

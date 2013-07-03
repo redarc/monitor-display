@@ -2,42 +2,38 @@ package com.redarc;
 
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 
-import com.redarc.webfetcher.StreamGobbler;
-import com.redarc.webfetcher.WebFetcher;
+import com.redarc.lteweb.WebFTReport;
+import com.redarc.lteweb.WebIPad;
+import com.redarc.lteweb.WebMTGuide;
+import com.redarc.lteweb.WebW1324;
+import com.redarc.lteweb.WebW22;
+import com.redarc.webparser.IPadParser;
 
 public class MonitorDisplay {
-	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
-		private static final long serialVersionUID = 1L;
-		{
-			put("FT_88_4_4","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846");
-			put("FT_88_4_5","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830");
-			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
-		}
-	};
 	
-	private static final String WEBPATH = System.getProperty("user.dir");
+	public static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
+	//public static final String WEBPATH = System.getProperties("user.dir");
+	public static final String LOCAL_SRV = "http://10.186.135.173/";
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
 		
-		downloadWeb();
+		WebIPad ipadWeb = new WebIPad(new IPadParser());
+		WebW22 w22 = new WebW22();
+		WebW1324 w1324 = new WebW1324();
+		WebFTReport ftReport = new WebFTReport("FT_L23_DAILY_REPORT.html");
+		WebMTGuide mtGuide = new WebMTGuide("LMR_Main_Track_delivery_guidelines.html");
 		
-		IPadParser.parseIpad();
+		WebGenerator webGen = new WebGenerator("redarc.html");
+		webGen.addWeblist(ipadWeb);
+		webGen.addWeblist(ftReport);
+		webGen.addWeblist(mtGuide);
+		webGen.addWeblist(w22);
+		webGen.addWeblist(w1324);
+		
+		webGen.genertorHtml();
 
 	    System.out.println("iPad parse end");
-	}
-
-	/**
-	 * @throws IOException
-	 * @author EGANYAO
-	 * download all webpage by TRACK_URLS_MAP
-	 * @throws InterruptedException 
-	 */
-	public static void downloadWeb() throws IOException, InterruptedException{
-		for(String key : TRACK_URLS_MAP.keySet()){
-			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
-		}
 	}
 }

@@ -6,68 +6,31 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Div;
-import org.apache.ecs.html.H1;
-import org.apache.ecs.html.H2;
 import org.apache.ecs.html.Head;
 import org.apache.ecs.html.Html;
 import org.apache.ecs.html.Link;
 import org.apache.ecs.html.Meta;
 import org.apache.ecs.html.Script;
-import org.apache.ecs.html.TBody;
-import org.apache.ecs.html.TD;
-import org.apache.ecs.html.TH;
-import org.apache.ecs.html.THead;
-import org.apache.ecs.html.TR;
-import org.apache.ecs.html.Table;
-import org.apache.ecs.xhtml.br;
-import org.apache.ecs.xhtml.p;
 import org.apache.ecs.xml.XML;
 
-import com.redarc.lteweb.FTDailyReportWeb;
+import com.redarc.webparser.IPadParser;
 
 public class WebGenerator {
 	
 	//move to config file
-	private static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
-		private static final long serialVersionUID = 1L;
-		{
-			put("FT_88_4_4","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846");
-			put("FT_88_4_5","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830");
-			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
-		}
-	};
-	
-	private static final String WEBPATH = System.getProperty("user.dir");
-	//private static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
 	private static final Integer DELAY_TIME = 5000;//ms
 	private static final Integer SWAP_TIME = 2000;//ms
-	private static final Integer REFRESH_TIME = (TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
-	
-	
-	private static final String WEBNAME = "iPadUPStatus.html";
-	private static final String LOCAL_SRV = "http://10.186.135.173/";
-	private static int RECUP_MAX_NO = 3;
-	private static int RECORD_MAX_NO = 4;
-	private static final String FT_L23_DAILY_TEST_REPORT = "FT_L23_DAILY_REPORT.html"; 
-	private static final String MT_DELIVERY_GUIDELINE = "LMR_Main_Track_delivery_guidelines.html"; 
-	private static LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
-	private static LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
-	
+	private static final Integer REFRESH_TIME = (IPadParser.TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
 	private String filename;
+	private List<BaseWeb> weblist = new ArrayList<BaseWeb>();
 	private List<String> swapContent = new ArrayList<String>();
-	
+	private List<String> stylelist = new ArrayList<String>();
 	public WebGenerator(String filename){
 		this.filename = filename;
-	}
-	
-	public String build(BaseWeb web){
-		return null;
 	}
 	
 	/**
@@ -76,8 +39,7 @@ public class WebGenerator {
 	 * @param html
 	 */
     public void genertorHtml(){
-		writeToFile(WEBPATH + File.separator + filename, builderWeb(recUP_Map));
-		//writeToFile(WEBPATH + WEBNAME, builderWeb(recUP_Map));
+		writeToFile(MonitorDisplay.WEBPATH /*+ File.separator*/ + filename, builderWeb());
     }
 
     private void writeToFile(String pathName, String html){
@@ -177,16 +139,12 @@ public class WebGenerator {
 		return style;
     } 
     
-    public void addSwapWeb(String webContent){
+    private void addSwapWeb(String webContent){
     	swapContent.add("\"" + webContent + "\"");
     }
     
-    private Script buildScript(HashMap<String, List<RecUP>> recUP_Map){
-	    //BaseWeb web = new IPadWeb(IPadParser.parseIpad(););
-    	BaseWeb web = new FTDailyReportWeb("xxx");
-    	web.build(swapContent);
-    	
-		String scriptContent = "$(function(){" +
+    private Script buildScript(){
+    	String scriptContent = "$(function(){" +
 				"$('.live-tile').liveTile({" +
 				"swapBack:'html',"  +
 				"mode:'carousel'," +
@@ -204,13 +162,13 @@ public class WebGenerator {
 		return script;
     } 
     
-    private String builderWeb(HashMap<String, List<RecUP>> recUP_Map){
+    private String builderWeb(){
 		Link link = new Link();
 		link.addAttribute("href", "../MetroJS/MetroJs.css");
 		link.addAttribute("type", "text/css");
 		link.addAttribute("rel", "stylesheet");
 		
-		Script script = buildScript(recUP_Map);
+		Script script = buildScript();
 		XML style = buildCCS();
 		
 		Head head = new Head();
@@ -225,11 +183,12 @@ public class WebGenerator {
 		head.addElement(link);
         head.addElement(script);
         head.addElement(style);
-        //TODO style
-        //head.addElement(excelStyle);
-        //head.addElement(mtGuidelineStyle);
+        
+        for(String sty : stylelist){
+        	head.addElement(sty);
+        }
 
-		//Body
+        //Body
 		Div liveTile = new Div();
 		liveTile.setClass("live-tile");
 		liveTile.addElement(new Div("Ready")).addElement(new Div("Start"));
@@ -247,4 +206,12 @@ public class WebGenerator {
 	    
 	    return html.toString();
     }
+
+	public void addWeblist(BaseWeb web){
+		weblist.add(web);
+		for(String content : web.build()){
+			addSwapWeb(content);
+		}
+		stylelist.add(web.style());
+	}
 }
