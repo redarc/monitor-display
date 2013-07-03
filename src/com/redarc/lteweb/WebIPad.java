@@ -15,7 +15,6 @@ import org.apache.ecs.xhtml.br;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
-import com.redarc.webparser.HRParser;
 import com.redarc.webparser.IPadParser;
 
 public class WebIPad extends BaseWeb{
