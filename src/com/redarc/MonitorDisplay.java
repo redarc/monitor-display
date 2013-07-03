@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.redarc.lteweb.WebFTReport;
 import com.redarc.lteweb.WebIPad;
 import com.redarc.lteweb.WebMTGuide;
+import com.redarc.lteweb.WebSecurity;
 import com.redarc.lteweb.WebW1324;
 import com.redarc.lteweb.WebW22;
 import com.redarc.webparser.IPadParser;
@@ -24,11 +25,13 @@ public class MonitorDisplay {
 		WebW1324 w1324 = new WebW1324();
 		WebFTReport ftReport = new WebFTReport("FT_L23_DAILY_REPORT.html");
 		WebMTGuide mtGuide = new WebMTGuide("LMR_Main_Track_delivery_guidelines.html");
+		WebSecurity security = new WebSecurity();
 		
-		WebGenerator webGen = new WebGenerator("redarc.html");
+		WebGenerator webGen = new WebGenerator("iPadUPStatus.html");
 		webGen.addWeblist(ipadWeb);
 		webGen.addWeblist(ftReport);
 		webGen.addWeblist(mtGuide);
+		webGen.addWeblist(security);
 		webGen.addWeblist(w22);
 		webGen.addWeblist(w1324);
 		

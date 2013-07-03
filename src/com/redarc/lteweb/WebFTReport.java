@@ -38,4 +38,10 @@ public class WebFTReport extends ConvertWeb{
 		    return null;
 		}
 	}
+
+	@Override
+	public String script() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

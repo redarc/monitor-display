@@ -10,4 +10,5 @@ import java.util.List;
 public abstract class BaseWeb {
 	public abstract List<String> build();
 	public abstract String style(); 
+	public abstract String script();
 }

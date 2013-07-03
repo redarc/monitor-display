@@ -55,7 +55,7 @@ public class IPadParser {
 	 * 
 	 */
 	public LinkedHashMap<String, List<RecUP>>  parseIpad(){
-		//downloadWeb();
+		downloadWeb();
 		mappingLocalMap();
 		for(String key : LOCAL_WEB_PATH.keySet()) {
 			String url = LOCAL_WEB_PATH.get(key);

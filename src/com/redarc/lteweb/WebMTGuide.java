@@ -36,4 +36,9 @@ public class WebMTGuide extends ConvertWeb {
 		}
 	}
 
+	@Override
+	public String script() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

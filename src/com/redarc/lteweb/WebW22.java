@@ -41,4 +41,10 @@ public class WebW22 extends BaseWeb{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String script() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

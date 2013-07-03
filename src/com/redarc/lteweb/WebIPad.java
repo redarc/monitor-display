@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.ecs.html.Div;
+import org.apache.ecs.html.H2;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -15,6 +16,7 @@ import org.apache.ecs.xhtml.br;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
+import com.redarc.webparser.HRParser;
 import com.redarc.webparser.IPadParser;
 
 public class WebIPad extends BaseWeb{
@@ -38,7 +40,6 @@ public class WebIPad extends BaseWeb{
                     continue; 		
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    //ret.add("\"" + div_table.toString() + "\"");
                     ret.add(div_table.toString());
 				}
 			}
@@ -52,11 +53,9 @@ public class WebIPad extends BaseWeb{
 				}else if(i == recUP_Map.size()){
 					Div div_table = buildTable(recUP_Map.get(key),key);
 					ret.add(div_table.toString());
-					//ret.add("\"" + div_table.toString() + "\"");
 				}else{
                     Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
                     ret.add(div_table.toString());
-                    //ret.add("\"" + div_table.toString() + "\"");
 				}
 			}
 		}
@@ -67,7 +66,11 @@ public class WebIPad extends BaseWeb{
         TD td = new TD();
         td.setVAlign("middle");
         
-        td.addElement(new br().setTagText(recUP.getTitle()));
+        br up_title = new br();
+        up_title.setClass("recUPTitle");
+        up_title.setTagText(recUP.getTitle());
+        td.addElement(new H2().setTagText(recUP.getTitle()));
+        
         int i = 0;
         for(String wp_no : recUP.getWp_Set()){
         	 if( i > REC_RD_MAX_COUNT){
@@ -94,10 +97,22 @@ public class WebIPad extends BaseWeb{
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
-//	       	 String trName = HRParser.heading(tr_no);
-//        	 td.addElement(new br().setTagText(tr_no + " " + trName));
-	       	td.addElement(new br().setTagText(tr_no));
-        	i++;
+	       	//String trName = "";
+	       	 
+	       	 System.out.println("----------------hrparser start------------");
+	       	 String trName = HRParser.heading(tr_no);
+	       	 //new HRParserDelay(trName,10);
+             try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	    
+             System.out.println("----------------hrparser over------------");
+             
+        	 td.addElement(new br().setTagText(tr_no + " " + trName));
+	       	 td.addElement(new br().setTagText(tr_no));
+        	 i++;
         }
         td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
         return td;
@@ -170,6 +185,12 @@ public class WebIPad extends BaseWeb{
 
 	@Override
 	public String style() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String script() {
 		// TODO Auto-generated method stub
 		return null;
 	}

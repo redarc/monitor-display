@@ -29,6 +29,8 @@ public class WebGenerator {
 	private List<BaseWeb> weblist = new ArrayList<BaseWeb>();
 	private List<String> swapContent = new ArrayList<String>();
 	private List<String> stylelist = new ArrayList<String>();
+	private List<String> scriptlist = new ArrayList<String>();
+	
 	public WebGenerator(String filename){
 		this.filename = filename;
 	}
@@ -39,7 +41,11 @@ public class WebGenerator {
 	 * @param html
 	 */
     public void genertorHtml(){
-		writeToFile(MonitorDisplay.WEBPATH /*+ File.separator*/ + filename, builderWeb());
+    	if(System.getProperty("os.name").contains("Windows")){
+    		writeToFile(MonitorDisplay.WEBPATH /*+ File.separator*/ + filename, builderWeb());
+    	}else{
+    		writeToFile(MonitorDisplay.WEBPATH + File.separator + filename, builderWeb());
+    	}
     }
 
     private void writeToFile(String pathName, String html){
@@ -128,6 +134,17 @@ public class WebGenerator {
 				"text-align: center;" +
 				"vertical-align: middle" +
 				"}" +
+				".security{"+
+				"background-image : url(slide0002_image001.jpg);" +
+				"background-position: center;"+
+				"background-repeat:no-repeat;"+
+				"background-size: 1394px 1050px;"+
+				"height:1050;"+
+				"width:1394;"+
+				"}"	+	
+				".security h1{font-size: 50px}" +
+				".security h2{font-size: 40px}"+
+				".recUPTitle H2{color: blue;}" +
 				".se_context{line-height: 42px;color : blue;}" + 
 				".se_context h1{font-size: 50px}" +
 				".se_context h2{font-size: 40px}" +
@@ -168,6 +185,10 @@ public class WebGenerator {
 		link.addAttribute("type", "text/css");
 		link.addAttribute("rel", "stylesheet");
 		
+		Link pptlink = new Link();
+		pptlink.addAttribute("href", "master03_stylesheet.css");
+		pptlink.addAttribute("rel", "stylesheet");
+		
 		Script script = buildScript();
 		XML style = buildCCS();
 		
@@ -181,9 +202,17 @@ public class WebGenerator {
 		head.addElement(new Script().addAttribute("src", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"));
 		head.addElement(new Script().addAttribute("src", "../MetroJS/MetroJs.js"));
 		head.addElement(link);
+		head.addElement(pptlink);
+		
         head.addElement(script);
-        head.addElement(style);
+        for(String scr : scriptlist){
+        	if(null != scr){
+        		System.out.print("script: " + scr);
+        		head.addElement(scr);
+        	}
+        }
         
+        head.addElement(style);
         for(String sty : stylelist){
         	head.addElement(sty);
         }
@@ -213,5 +242,6 @@ public class WebGenerator {
 			addSwapWeb(content);
 		}
 		stylelist.add(web.style());
+		scriptlist.add(web.script());
 	}
 }
