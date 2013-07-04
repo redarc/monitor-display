@@ -20,6 +20,8 @@ public class MonitorDisplay {
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
 		
+		Resconfig.getInstance();
+		/*
 		WebIPad ipadWeb = new WebIPad(new IPadParser());
 		WebW22 w22 = new WebW22();
 		WebW1324 w1324 = new WebW1324();
@@ -36,7 +38,7 @@ public class MonitorDisplay {
 		webGen.addWeblist(w1324);
 		
 		webGen.genertorHtml();
-
+		*/
 	    System.out.println("iPad parse end");
 	}
 }
