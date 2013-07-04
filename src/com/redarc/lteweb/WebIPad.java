@@ -16,13 +16,14 @@ import org.apache.ecs.xhtml.br;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
+import com.redarc.Resconfig;
 import com.redarc.webparser.HRParser;
 import com.redarc.webparser.IPadParser;
 
 public class WebIPad extends BaseWeb{
 	
 	private LinkedHashMap<String, List<RecUP>> recUP_Map;
-	private final int REC_RD_MAX_COUNT = 5;
+	//private final int REC_RD_MAX_COUNT = 5;
 	
 	public WebIPad(IPadParser iPadParser){
 		this.recUP_Map = iPadParser.parseIpad();
@@ -73,7 +74,7 @@ public class WebIPad extends BaseWeb{
         
         int i = 0;
         for(String wp_no : recUP.getWp_Set()){
-        	 if( i > REC_RD_MAX_COUNT){
+        	 if( i > Resconfig.getInstance().getTr_max_no()){
         		 td.addElement(new br().setTagText("etc."));
         		 break;
         	 }
@@ -83,7 +84,7 @@ public class WebIPad extends BaseWeb{
         
         i = 0;
         for(String cr_no : recUP.getCr_Set()){
-	       	 if( i > REC_RD_MAX_COUNT){
+	       	 if( i > Resconfig.getInstance().getTr_max_no()){
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
@@ -93,7 +94,7 @@ public class WebIPad extends BaseWeb{
         
         i = 0;
         for(String tr_no : recUP.getTr_Set()){
-	       	 if( i > REC_RD_MAX_COUNT){
+	       	 if( i > Resconfig.getInstance().getTr_max_no()){
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }

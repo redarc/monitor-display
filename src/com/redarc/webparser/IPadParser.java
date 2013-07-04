@@ -1,5 +1,6 @@
 package com.redarc.webparser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,22 +15,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.redarc.MonitorDisplay;
 import com.redarc.RecUP;
+import com.redarc.Resconfig;
 import com.redarc.webfetcher.WebFetcher;
 
 public class IPadParser {
-	public static final LinkedHashMap<String,String> TRACK_URLS_MAP = new LinkedHashMap<String,String>(){
-		private static final long serialVersionUID = 1L;
-		{
-			put("FT_88_4_4","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846");
-			put("FT_88_4_5","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830");
-			put("MT_19_10","https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685");
-		}
-	};
-	private static int RECUP_MAX_NO = 3;
-	private static LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
-	private static LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
+	private LinkedHashMap<String,String> TRACK_URLS_MAP = Resconfig.getInstance().getTrackMap();
+	private LinkedHashMap<String,String> LOCAL_WEB_PATH = new LinkedHashMap<String, String>();
+	private LinkedHashMap<String, List<RecUP>> recUP_Map = new LinkedHashMap<String, List<RecUP>>();
 	
 	public IPadParser(){}
 	
@@ -47,7 +40,7 @@ public class IPadParser {
 	
 	private void mappingLocalMap(){
 		for(String key : TRACK_URLS_MAP.keySet()){
-			LOCAL_WEB_PATH.put(key, MonitorDisplay.LOCAL_SRV + key + ".html");
+			LOCAL_WEB_PATH.put(key, Resconfig.getInstance().getLocalsrv() + "tmp" + File.separator + key + ".html");
 		}
 	}
 	
@@ -88,7 +81,7 @@ public class IPadParser {
 					RecUP recUP = upContentSniffer(up_list.get(i).text(), time_list.get(i).text(),comments_list.get(i).text(),key);
 					recUP_list.add(recUP);
 					recCount++;
-					if(RECUP_MAX_NO == recCount){
+					if(Resconfig.getInstance().getUp_max_no() == recCount){
 						break;
 					}
 				}

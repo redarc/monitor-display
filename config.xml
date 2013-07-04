@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<localserver>
-	http://10.186.135.173/
-	<test>ttt</test>
-</localserver>
+<rescnfog>
+	<ipadinfo>
+		<mhweburl>https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=</mhweburl>
+		<tracklist>
+			<ft8844>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846</ft8844>
+			<ft8845>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830</ft8845>
+			<mt1910>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685</mt1910>
+		</tracklist>
+	</ipadinfo>
+	<monitorsrv>
+		<localserver>http://10.186.135.173/</localserver>
+		<localpath></localpath>
+		<indexfile>iPadUPStatus.html</indexfile>
+	</monitorsrv>
+	<convertweb>
+	    <ftdailyreport>FT_L23_DAILY_REPORT.html</ftdailyreport>
+	    <mtguideline>LMR_Main_Track_delivery_guidelines.html</mtguideline>
+		<hrheadingid>frm_field_heading_j_id_9v_notetextEditMode</hrheadingid>
+		<hrexceptionid>compAjaxExceptionDialog_msgDialogPanel</hrexceptionid>
+	</convertweb>
+	<displayctl>
+		<swaptime>5000</swaptime>
+		<delaytime>2000</delaytime>
+		<refreshtme>10000</refreshtme>
+		<trmaxno>5</trmaxno>
+	    <recmaxno>3</recmaxno>
+	</displayctl>
+</rescnfog>
+

@@ -17,14 +17,12 @@ import org.apache.ecs.html.Meta;
 import org.apache.ecs.html.Script;
 import org.apache.ecs.xml.XML;
 
-import com.redarc.webparser.IPadParser;
-
 public class WebGenerator {
 	
 	//move to config file
-	private static final Integer DELAY_TIME = 5000;//ms
-	private static final Integer SWAP_TIME = 2000;//ms
-	private static final Integer REFRESH_TIME = (IPadParser.TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
+	//private static final Integer DELAY_TIME = 5000;//ms
+	//private static final Integer SWAP_TIME = 2000;//ms
+	//private static final Integer REFRESH_TIME = (IPadParser.TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
 	private String filename;
 	private List<BaseWeb> weblist = new ArrayList<BaseWeb>();
 	private List<String> swapContent = new ArrayList<String>();
@@ -42,9 +40,9 @@ public class WebGenerator {
 	 */
     public void genertorHtml(){
     	if(System.getProperty("os.name").contains("Windows")){
-    		writeToFile(MonitorDisplay.WEBPATH /*+ File.separator*/ + filename, builderWeb());
+    		writeToFile(System.getProperty("user.dir") + filename, builderWeb());
     	}else{
-    		writeToFile(MonitorDisplay.WEBPATH + File.separator + filename, builderWeb());
+    		writeToFile(System.getProperty("user.dir") + File.separator + filename, builderWeb());
     	}
     }
 
@@ -166,9 +164,9 @@ public class WebGenerator {
 				"swapBack:'html',"  +
 				"mode:'carousel'," +
 				"backContent: " + swapContent.toString() + "," +
-				"speed: " + "'" + SWAP_TIME.toString() + "'" +"," +
+				"speed: " + "'" + Resconfig.getInstance().getSwapTime() + "'" +"," +
 				"initDelay: '0',"+
-				"delay: " + "'" + DELAY_TIME.toString() + "'" +"," +
+				"delay: " + "'" + Resconfig.getInstance().getDelayTime() + "'" +"," +
 				"htmlSwap: {backIsRandom: false}" +
 				"});});";
 		
@@ -195,7 +193,7 @@ public class WebGenerator {
 		Head head = new Head();
 		Meta meta = new Meta();
 		meta.addAttribute("http-equiv", "refresh");
-		meta.addAttribute("content", REFRESH_TIME);
+		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime());
 		head.addElement(meta);
 		
 		head.addElement(new Script().addAttribute("src", "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"));

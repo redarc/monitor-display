@@ -1,23 +1,25 @@
 package com.redarc.webparser;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.redarc.MonitorDisplay;
+import com.redarc.Resconfig;
 import com.redarc.webfetcher.WebFetcher;
 
 public class HRParser {
-	private static final String MHWEB_URL = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
-	private static final String HEADING_ID = "frm_field_heading_j_id_9v_notetextEditMode";
-	private static final String EXCEPTION = "compAjaxExceptionDialog_msgDialogPanel";
+	//private static final String MHWEB_URL = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
+	//private static final String HEADING_ID = "frm_field_heading_j_id_9v_notetextEditMode";
+	//private static final String EXCEPTION = "compAjaxExceptionDialog_msgDialogPanel";
+	
 	public HRParser(){}
 	
 	public static String heading(String hr_no){
-		if(WebFetcher.download(hr_no, MHWEB_URL + hr_no)){
-			return parseHRNO(MonitorDisplay.LOCAL_SRV + hr_no + ".html");
+		if(WebFetcher.download(hr_no, Resconfig.getInstance().getMhweburl() + hr_no)){
+			return parseHRNO(Resconfig.getInstance().getLocalsrv() + "tmp" + File.separator +  hr_no + ".html");
 		}else{
 			return null;
 		}
@@ -39,8 +41,8 @@ public class HRParser {
 			Element heading = null;
 			if(null != doc)
 			{
-				Element headingParent = doc.getElementById(HEADING_ID);
-				Element exception = doc.getElementById(EXCEPTION);
+				Element headingParent = doc.getElementById(Resconfig.getInstance().getHrheadingId());
+				//Element exception = doc.getElementById(Resconfig.getInstance().getHrexceptionId());
 				if(null != headingParent){
 					heading = headingParent.child(0);
 				}

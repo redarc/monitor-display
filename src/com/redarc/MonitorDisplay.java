@@ -14,22 +14,20 @@ import com.redarc.webparser.IPadParser;
 public class MonitorDisplay {
 	
 	//public static final String WEBPATH = "C:/Users/EGANYAO/Desktop/Web_Display/MetroTest/";
-	public static final String WEBPATH = System.getProperty("user.dir");
-	public static final String LOCAL_SRV = "http://10.186.135.173/";
+	//public static final String WEBPATH = System.getProperty("user.dir");
+	//public static final String LOCAL_SRV = "http://10.186.135.173/";
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		System.out.println("iPad parse start");
 		
-		Resconfig.getInstance();
-		/*
 		WebIPad ipadWeb = new WebIPad(new IPadParser());
 		WebW22 w22 = new WebW22();
 		WebW1324 w1324 = new WebW1324();
-		WebFTReport ftReport = new WebFTReport("FT_L23_DAILY_REPORT.html");
-		WebMTGuide mtGuide = new WebMTGuide("LMR_Main_Track_delivery_guidelines.html");
+		WebFTReport ftReport = new WebFTReport(Resconfig.getInstance().getFtdailyreport());
+		WebMTGuide mtGuide = new WebMTGuide(Resconfig.getInstance().getMtguideline());
 		WebSecurity security = new WebSecurity();
 		
-		WebGenerator webGen = new WebGenerator("iPadUPStatus.html");
+		WebGenerator webGen = new WebGenerator(Resconfig.getInstance().getIndexfile());
 		webGen.addWeblist(ipadWeb);
 		webGen.addWeblist(ftReport);
 		webGen.addWeblist(mtGuide);
@@ -38,7 +36,6 @@ public class MonitorDisplay {
 		webGen.addWeblist(w1324);
 		
 		webGen.genertorHtml();
-		*/
 	    System.out.println("iPad parse end");
 	}
 }
