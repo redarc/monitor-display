@@ -19,10 +19,6 @@ import org.apache.ecs.xml.XML;
 
 public class WebGenerator {
 	
-	//move to config file
-	//private static final Integer DELAY_TIME = 5000;//ms
-	//private static final Integer SWAP_TIME = 2000;//ms
-	//private static final Integer REFRESH_TIME = (IPadParser.TRACK_URLS_MAP.size() + 50) * (DELAY_TIME + SWAP_TIME) / 1000;//s
 	private String filename;
 	private List<BaseWeb> weblist = new ArrayList<BaseWeb>();
 	private List<String> swapContent = new ArrayList<String>();
