@@ -1,7 +1,6 @@
 package com.redarc.lteweb;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

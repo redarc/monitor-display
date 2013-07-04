@@ -53,7 +53,9 @@ public class HRParser {
 				*/
 			}
 			if(null != heading){
-				return heading.text();
+				String result = heading.text().replace('\"', '\'').replace('\n', ' ').replace("¡°","\\\"").replace("¡±","\\\"").replace('\t', ' ').replace('\r',' ');
+				System.out.println("HRHeading = " + result);
+				return result;
 			}else{
 				return null;
 			}
