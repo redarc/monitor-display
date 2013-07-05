@@ -22,7 +22,7 @@
 	<displayctl>
 		<swaptime>5000</swaptime>
 		<delaytime>2000</delaytime>
-		<refreshtme>10000</refreshtme>
+		<refreshtme>25</refreshtme>
 		<trmaxno>5</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>
