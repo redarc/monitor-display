@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Div;
 import org.apache.ecs.html.H2;
+import org.apache.ecs.html.Head;
+import org.apache.ecs.html.Html;
+import org.apache.ecs.html.Meta;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -17,50 +21,66 @@ import org.apache.ecs.xhtml.br;
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
 import com.redarc.Resconfig;
+import com.redarc.WebBuilder;
 import com.redarc.webparser.HRParser;
 import com.redarc.webparser.IPadParser;
 
 public class WebIPad extends BaseWeb{
-	
 	private LinkedHashMap<String, List<RecUP>> recUP_Map;
-	//private final int REC_RD_MAX_COUNT = 5;
+	private List<BaseWeb> ipadweblist = new ArrayList<BaseWeb>();
 	
 	public WebIPad(IPadParser iPadParser){
 		this.recUP_Map = iPadParser.parseIpad();
 	}
 	
-	public List<String> build(){
-		List<String> ret = new ArrayList<String>();
+	public void build(){
 		String preKey = null;
-		if(0 == recUP_Map.size() % 2){
-			int i = 0;
-			for (String key : recUP_Map.keySet()){
-				i++;
-				if(0 != i%2 && i != recUP_Map.size()){
-					preKey= key;
-                    continue; 		
-				}else{
-                    Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    ret.add(div_table.toString());
-				}
-			}
-		}else{
-			int i = 0;
-			for (String key : recUP_Map.keySet()){
-				i++;
-				if(0 != i%2 && i != recUP_Map.size()){
-					preKey= key;
-                    continue; 		
-				}else if(i == recUP_Map.size()){
-					Div div_table = buildTable(recUP_Map.get(key),key);
-					ret.add(div_table.toString());
-				}else{
-                    Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-                    ret.add(div_table.toString());
-				}
+		String preFile = null;//TODO init by first other web
+		int i = 0;
+		for (String key : recUP_Map.keySet()){
+			i++;
+			if(0 != i%2 && i != recUP_Map.size()){
+				preKey= key;
+                continue; 		
+			}else if((0 != recUP_Map.size()%2) && (i == recUP_Map.size())){
+				Div div_table = buildTable(recUP_Map.get(key),key);
+        		
+                Head head = new Head();
+        		Meta meta = new Meta();
+        		meta.addAttribute("http-equiv", "refresh");
+        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ",url=" + preKey + ".html");
+        		head.addElement(meta);
+        		head.addElement(script());
+        		head.addElement(style());
+        		
+        		Body body = new Body();
+        		body.addElement(div_table.toString());
+        		
+        	    Html html = new Html();
+        	    html.addElement(head);
+        	    html.addElement(body);
+        	    WebBuilder.writeToFile(key + ".html", html.toString());
+			}else{
+                Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
+        		
+                Head head = new Head();
+        		Meta meta = new Meta();
+        		meta.addAttribute("http-equiv", "refresh");
+        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ",url=" + preFile + ".html");
+        		head.addElement(meta);
+        		head.addElement(script());
+        		head.addElement(style());
+        		
+        		Body body = new Body();
+        		body.addElement(div_table.toString());
+        		
+        	    Html html = new Html();
+        	    html.addElement(head);
+        	    html.addElement(body);
+        	    WebBuilder.writeToFile(key + preKey + ".html", html.toString());
+        	    preFile = key + preFile;
 			}
 		}
-		return ret;
 	}
 	
     private TD buildUPTD(RecUP recUP){
@@ -98,19 +118,12 @@ public class WebIPad extends BaseWeb{
 	    		 td.addElement(new br().setTagText("etc."));
 	    		 break;
 	    	 }
-	       	//String trName = "";
-	       	 
-	       	 System.out.println("----------------hrparser start------------");
 	       	 String trName = HRParser.heading(tr_no);
-	       	 //new HRParserDelay(trName,10);
              try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	    
-             System.out.println("----------------hrparser over------------");
-             
         	 td.addElement(new br().setTagText(tr_no + " " + trName));
 	       	 td.addElement(new br().setTagText(tr_no));
         	 i++;
@@ -192,6 +205,12 @@ public class WebIPad extends BaseWeb{
 
 	@Override
 	public String script() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String body() {
 		// TODO Auto-generated method stub
 		return null;
 	}

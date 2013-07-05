@@ -232,9 +232,6 @@ public class WebGenerator {
 
 	public void addWeblist(BaseWeb web){
 		weblist.add(web);
-		for(String content : web.build()){
-			addSwapWeb(content);
-		}
 		stylelist.add(web.style());
 		scriptlist.add(web.script());
 	}
