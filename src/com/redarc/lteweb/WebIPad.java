@@ -1,6 +1,5 @@
 package com.redarc.lteweb;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -27,15 +26,13 @@ import com.redarc.webparser.IPadParser;
 
 public class WebIPad extends BaseWeb{
 	private LinkedHashMap<String, List<RecUP>> recUP_Map;
-	private List<BaseWeb> ipadweblist = new ArrayList<BaseWeb>();
-	
+	private String lastfileName;//TODO init by first other web
 	public WebIPad(IPadParser iPadParser){
 		this.recUP_Map = iPadParser.parseIpad();
 	}
 	
 	public void build(){
 		String preKey = null;
-		String preFile = null;//TODO init by first other web
 		int i = 0;
 		for (String key : recUP_Map.keySet()){
 			i++;
@@ -48,7 +45,7 @@ public class WebIPad extends BaseWeb{
                 Head head = new Head();
         		Meta meta = new Meta();
         		meta.addAttribute("http-equiv", "refresh");
-        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ",url=" + preKey + ".html");
+        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ";url=" + preKey + ".html");
         		head.addElement(meta);
         		head.addElement(script());
         		head.addElement(style());
@@ -60,13 +57,14 @@ public class WebIPad extends BaseWeb{
         	    html.addElement(head);
         	    html.addElement(body);
         	    WebBuilder.writeToFile(key + ".html", html.toString());
+        	    lastfileName = key;
 			}else{
                 Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
         		
                 Head head = new Head();
         		Meta meta = new Meta();
         		meta.addAttribute("http-equiv", "refresh");
-        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ",url=" + preFile + ".html");
+        		meta.addAttribute("content", Resconfig.getInstance().getRefreshTime() + ";url=" + lastfileName + ".html");
         		head.addElement(meta);
         		head.addElement(script());
         		head.addElement(style());
@@ -78,7 +76,7 @@ public class WebIPad extends BaseWeb{
         	    html.addElement(head);
         	    html.addElement(body);
         	    WebBuilder.writeToFile(key + preKey + ".html", html.toString());
-        	    preFile = key + preFile;
+        	    lastfileName = key + lastfileName;
 			}
 		}
 	}
@@ -213,5 +211,13 @@ public class WebIPad extends BaseWeb{
 	public String body() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getLastfileName() {
+		return lastfileName;
+	}
+
+	public void setLastfileName(String lastfileName) {
+		this.lastfileName = lastfileName;
 	}
 }
