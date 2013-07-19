@@ -8,8 +8,9 @@ import com.redarc.BaseWeb;
 
 public class WebSecurity extends BaseWeb{
 
-	public WebSecurity() {}
-
+	public WebSecurity(String fileName){
+		super(fileName);
+	}
 	@Override
 	public String style() {
 		return null;

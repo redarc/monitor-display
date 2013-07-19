@@ -150,10 +150,6 @@ public class WebGenerator {
 		return style;
     } 
     
-    private void addSwapWeb(String webContent){
-    	swapContent.add("\"" + webContent + "\"");
-    }
-    
     private Script buildScript(){
     	String scriptContent = "$(function(){" +
 				"$('.live-tile').liveTile({" +

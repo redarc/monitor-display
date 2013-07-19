@@ -27,6 +27,12 @@ public abstract class BaseWeb {
 		this.nextPage = nextPage;
 	}
 	
+	public BaseWeb(){}
+	
+	public BaseWeb(String fileName){
+		this.fileName = fileName;
+	}
+	
 	public void build(){
 		Head head = new Head();
 		Meta meta = new Meta();

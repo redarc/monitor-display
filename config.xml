@@ -3,18 +3,21 @@
 	<ipadinfo>
 		<mhweburl>https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=</mhweburl>
 		<tracklist>
-			<ft8844>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846</ft8844>
-			<ft8845>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830</ft8845>
-			<mt1910>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685</mt1910>
+			<FT_88_4_4>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846</FT_88_4_4>
+			<FT_88_4_5>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830</FT_88_4_5>
+			<MT_19_10>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685</MT_19_10>
 		</tracklist>
 	</ipadinfo>
 	<rollist>
 	    <ftdailyreport>FT_L23_DAILY_REPORT.html</ftdailyreport>
 	    <mtguideline>LMR_Main_Track_delivery_guidelines.html</mtguideline>
+	    <security>Security.html</security>
 	</rollist>
 	<monitorsrv>
 		<localserver>http://10.186.135.173/</localserver>
-		<localpath>   </localpath> 
+		<user>root</user>
+		<passwd>root</passwd>
+		<localpath>/opt/3party_software/apache/htdocs</localpath> 
 	</monitorsrv>
 	<displayctl>
 		<delaytime>25</delaytime>
@@ -22,4 +25,3 @@
 	    <recmaxno>3</recmaxno>
 	</displayctl>
 </rescnfog>
-

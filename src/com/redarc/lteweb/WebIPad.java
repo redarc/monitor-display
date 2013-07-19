@@ -16,6 +16,7 @@ import org.apache.ecs.html.THead;
 import org.apache.ecs.html.TR;
 import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
+import org.apache.ecs.xml.XML;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
@@ -197,8 +198,58 @@ public class WebIPad extends BaseWeb{
 
 	@Override
 	public String style() {
-		// TODO Auto-generated method stub
-		return null;
+		String styleContent = new String("" +
+				"div#wholePage{}" +
+				"div#header{height: 0px}"+
+				".track_table{" +
+				"border:#000000 solid; " +
+				"border-width:2px 0px 0px 2px;" +
+				"width: 100%; " +
+				"height: 100%" +
+				"}" +
+				".track_table th{" +
+				"padding: 5px 5px 5px 5px;" +
+				"border:#000000 solid; " +
+				"border-width:0px 2px 2px 0px; " +
+				"font-family: Arial; " +
+				"font-size: 70px; " +
+				"font-style: oblique; " +
+				"font-weight: 900; " +
+				"height:10%;" +
+				"background: Aqua" +
+				"}" +
+				".track_table td{" +
+				"padding: 5px 5px 5px 5px;" +
+				"border:#000000 solid; " +
+				"border-width:0px 2px 2px 0px; " +
+				"font-family: Arial; " +
+				"font-size: 24px; " +
+				"font-style: normal; " +
+				"font-weight: 900; " +
+				"height:30%;" +
+				"text-align: center;" +
+				"vertical-align: middle" +
+				"}" +
+				".security{"+
+				"background-image : url(slide0002_image001.jpg);" +
+				"background-position: center;"+
+				"background-repeat:no-repeat;"+
+				"background-size: 1394px 1050px;"+
+				"height:1050;"+
+				"width:1394;"+
+				"}"	+	
+				".security h1{font-size: 50px}" +
+				".security h2{font-size: 40px}"+
+				".recUPTitle H2{color: blue;}" +
+				".se_context{line-height: 42px;color : blue;}" + 
+				".se_context h1{font-size: 50px}" +
+				".se_context h2{font-size: 40px}" +
+				".se_context p{font-size: 25px;font-family: Arial}" +
+				".live-title{width: 100%; height: 100%}");
+
+		XML style = new XML("style");
+		style.setTagText(styleContent);
+		return style.toString();
 	}
 
 	@Override

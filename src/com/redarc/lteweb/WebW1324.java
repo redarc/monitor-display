@@ -10,7 +10,9 @@ import com.redarc.BaseWeb;
 
 public class WebW1324 extends BaseWeb{
 
-	public WebW1324(){}
+	public WebW1324(String fileName){
+		super(fileName);
+	}
 	
 	@Override
 	public String style() {

@@ -16,6 +16,7 @@ public class Resconfig {
 
 	private String ftdailyreport = "FT_L23_DAILY_REPORT.html";
 	private String mtguideline = "LMR_Main_Track_delivery_guidelines.html";
+	private String security = "Security.html";
 	private String indexfile = "iPadUPStatus.html";
 	private String localpath = System.getProperty("user.dir");
 	private String localsrv = "http://10.186.135.173/";
@@ -49,10 +50,6 @@ public class Resconfig {
 		}else{
 			return new Resconfig();
 		}
-	}
-	
-	public String getByTagName(String tagName){
-		return null;
 	}
 	
 	public class ResVisitor extends VisitorSupport{
@@ -104,6 +101,9 @@ public class Resconfig {
 		    case "mtguideline":
 		    	setMtguideline(elem.getText());
 		    	break;
+		    case "security:":
+		    	setSecurity(elem.getText());
+		    	break;
 		    case "indexfile":
 		    	setIndexfile(elem.getText());
 		    	break;
@@ -118,7 +118,13 @@ public class Resconfig {
 		}
 	}
 	
-	
+	public String getSecurity() {
+		return security;
+	}
+
+	public void setSecurity(String security) {
+		this.security = security;
+	}
 	public String getLocalpath() {
 		return localpath;
 	}

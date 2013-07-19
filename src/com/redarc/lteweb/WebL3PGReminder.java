@@ -8,9 +8,12 @@ import org.apache.ecs.xhtml.p;
 import com.redarc.BaseWeb;
 
 public class WebL3PGReminder extends BaseWeb{
-
-	public WebL3PGReminder(){}
 	
+	public WebL3PGReminder(String fileName) {
+		super(fileName);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String style() {
 		// TODO Auto-generated method stub
