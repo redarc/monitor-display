@@ -30,6 +30,6 @@ public class MonitorDisplay {
 	    System.out.println("iPad parse end");
 		
 		FtpUtils f = new FtpUtils();
-		f.upload();
+		f.download("github.ppk", "C:/Users/EGANYAO/Desktop/xxxx");
 	}
 }
