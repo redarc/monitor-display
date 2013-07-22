@@ -11,22 +11,8 @@ public class WebL3PGReminder extends BaseWeb{
 	
 	public WebL3PGReminder(String fileName) {
 		super(fileName);
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String style() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String script() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String body() {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");

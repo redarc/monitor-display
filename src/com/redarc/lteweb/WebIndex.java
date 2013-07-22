@@ -1,72 +1,57 @@
 package com.redarc.lteweb;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.ecs.html.Script;
 
 import com.redarc.BaseWeb;
+import com.redarc.Resconfig;
 
-/*
-<html>
-<body>
-<h1 style="text-align:center;font-family:arial;color:red";>WELCOME</h1>
-<script type="text/javascript">
-    var httpServer = "http://10.186.135.173/";
-	var address=new Array();
-	address[0]=httpServer.concat("page1.html");
-	address[1]=httpServer.concat("page2.html");
-	address[2]=httpServer.concat("page3.html");
-	address[3]=httpServer.concat("page4.html");
-	address[4]=httpServer.concat("page5.html");
-	address[5]=httpServer.concat("page6.html");
-    address[6]=httpServer.concat("Daily Report.html");
-    address[7]=httpServer.concat("PGslide.html");
-	var mywindow=window.open(address[0]);
-	var i=1;
-	setInterval("page(i)",30000);
-	function page(j)
-	{
-		if(j==address.length)
-		{
-			i=0;
-		}
-		mywindow.location.href=address[i];
-		i++;
-	}
-</script>
-
-</body>
-</html>
-
- */
 public class WebIndex extends BaseWeb{
 
-	@Override
+	private HashSet<String> rolllist = new HashSet<String>();
+	
+	public void addRolllist(HashSet<String> weblist){
+		for(String webaddr : weblist){
+			rolllist.add(webaddr);
+		}
+	}
+	
+	public void addRolllist(Set<BaseWeb> weblist){
+		for(BaseWeb web : weblist){
+			rolllist.add(web.getFileName());
+		}
+	}
+	
+	public WebIndex(String fileName){
+		super(fileName);
+	}
+	
 	public String body() {
-		// TODO Auto-generated method stub
-		return null;
+		return "<body></body>";
 	}
 
-	@Override
-	public String style() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String script() {
-		// TODO Auto-generated method stub
 		StringBuffer content = new StringBuffer();
-		content.append("var httpServer = \"http://10.186.135.173/\";");
+		content.append("var httpServer = 'http://");
+		content.append(Resconfig.getInstance().getLocalsrv());
+		content.append("';");
 		content.append("var address=new Array();");
 		
-		content.append("address[0]=httpServer.concat('page1.html');");
-		content.append("address[1]=httpServer.concat('page1.html');");
-		content.append("address[2]=httpServer.concat('page1.html');");
-		content.append("address[3]=httpServer.concat('page1.html');");
-		content.append("address[4]=httpServer.concat('page1.html');");
-		
+		int i = 0;
+		for(String web : rolllist){
+			String tmp = String.format("address[%d]=httpServer.concat('%s.html');", i, web);
+			content.append(tmp);
+			i++;
+		}
+
 		content.append("var mywindow=window.open(address[0]);");
 		content.append("var i=1;");
-		content.append("setInterval('page(i)',30000);");
+		//content.append("setInterval('page(i)',30000);");
+		content.append("setInterval('page(i)',");
+		content.append(Resconfig.getInstance().getDelayTime());
+		content.append(");");
 		content.append("function page(j){");
 		content.append("if(j==address.length){");
 		content.append("i=0;");
@@ -78,5 +63,4 @@ public class WebIndex extends BaseWeb{
 		script.setTagText(content.toString());
 		return script.toString();
 	}
-
 }

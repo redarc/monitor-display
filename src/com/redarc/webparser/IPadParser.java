@@ -27,24 +27,6 @@ public class IPadParser {
 	public IPadParser(){}
 	
 	/**
-	 * @throws IOException
-	 * @author EGANYAO
-	 * download all webpage by TRACK_URLS_MAP
-	 * @throws InterruptedException 
-	 */
-	public void downloadWeb(){
-		for(String key : TRACK_URLS_MAP.keySet()){
-			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
-		}
-	}
-	
-	private void mappingLocalMap(){
-		for(String key : TRACK_URLS_MAP.keySet()){
-			LOCAL_WEB_PATH.put(key, Resconfig.getInstance().getLocalsrv() + "tmp" + File.separator + key + ".html");
-		}
-	}
-	
-	/**
 	 * 
 	 */
 	public LinkedHashMap<String, List<RecUP>>  parseIpad(){
@@ -90,6 +72,32 @@ public class IPadParser {
 			recUP_Map.put(key,recUP_list);
 		}
 		return recUP_Map;
+	}
+	
+	/**
+	 * @throws IOException
+	 * @author EGANYAO
+	 * download all web page by TRACK_URLS_MAP
+	 * @throws InterruptedException 
+	 */
+	public void downloadWeb(){
+		for(String key : TRACK_URLS_MAP.keySet()){
+			WebFetcher.download(key, TRACK_URLS_MAP.get(key));
+		}
+	}
+	
+	private void mappingLocalMap(){
+		for(String key : TRACK_URLS_MAP.keySet()){
+			StringBuffer fileaddr = new StringBuffer();
+			fileaddr.append("http://");
+			fileaddr.append(Resconfig.getInstance().getLocalsrv());
+			fileaddr.append(File.separator);
+			fileaddr.append("tmp");
+			fileaddr.append(File.separator);
+			fileaddr.append(key);
+			fileaddr.append(".html");
+			LOCAL_WEB_PATH.put(key, fileaddr.toString());
+		}
 	}
 	
 	/**

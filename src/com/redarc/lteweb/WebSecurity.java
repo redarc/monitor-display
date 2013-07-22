@@ -11,16 +11,7 @@ public class WebSecurity extends BaseWeb{
 	public WebSecurity(String fileName){
 		super(fileName);
 	}
-	@Override
-	public String style() {
-		return null;
-	}
 	
-	public String script(){
-		return null;
-	}
-
-	@Override
 	public String body() {
 		Div security = new Div();
 		security.setClass("security");

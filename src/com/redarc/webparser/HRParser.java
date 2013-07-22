@@ -19,7 +19,15 @@ public class HRParser {
 	
 	public static String heading(String hr_no){
 		if(WebFetcher.download(hr_no, Resconfig.getInstance().getMhweburl() + hr_no)){
-			return parseHRNO(Resconfig.getInstance().getLocalsrv() + "tmp" + File.separator +  hr_no + ".html");
+			StringBuffer fileaddr = new StringBuffer();
+			fileaddr.append("http://");
+			fileaddr.append(Resconfig.getInstance().getLocalsrv());
+			fileaddr.append(File.separator);
+			fileaddr.append("tmp");
+			fileaddr.append(File.separator);
+			fileaddr.append(hr_no);
+			fileaddr.append(".html");
+			return parseHRNO(fileaddr.toString());
 		}else{
 			return null;
 		}

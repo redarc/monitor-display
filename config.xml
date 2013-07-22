@@ -9,12 +9,13 @@
 		</tracklist>
 	</ipadinfo>
 	<rollist>
-	    <ftdailyreport>FT_L23_DAILY_REPORT.html</ftdailyreport>
-	    <mtguideline>LMR_Main_Track_delivery_guidelines.html</mtguideline>
-	    <security>Security.html</security>
+		<FTReport>FT_L23_DAILY_REPORT</FTReport>
+		<MTGuide>MT_Guideline</MTGuide>
+		<Security>security</Security>
+		<Index>index</Index>
 	</rollist>
 	<monitorsrv>
-		<localserver>http://10.186.135.173/</localserver>
+		<localserver>10.186.135.173</localserver>
 		<user>root</user>
 		<passwd>root</passwd>
 		<localpath>/opt/3party_software/apache/htdocs</localpath> 

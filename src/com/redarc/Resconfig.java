@@ -1,6 +1,7 @@
 package com.redarc;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +15,9 @@ import org.dom4j.io.*;
 
 public class Resconfig {
 
+	private HashSet<String> weblist = new HashSet<String>();
+	private String user = "root";
+	private String passwd = "root";
 	private String ftdailyreport = "FT_L23_DAILY_REPORT.html";
 	private String mtguideline = "LMR_Main_Track_delivery_guidelines.html";
 	private String security = "Security.html";
@@ -56,9 +60,12 @@ public class Resconfig {
 		public void visit(Element elem){
 		    switch(elem.getName()){
 		    case "mhweburl" :
+		    {
 		    	setMhweburl(elem.getText());
 		    	break;
+		    }
 		    case "tracklist" :
+		    {
 		    	@SuppressWarnings("rawtypes")
 				List list = elem.elements();
 		    	@SuppressWarnings("rawtypes")
@@ -68,45 +75,94 @@ public class Resconfig {
 		    		putTrackMap(track.getName(),track.getText());
 		    	}
 		    	break;
+		    }
+		    case "rollist" :
+		    {
+		    	@SuppressWarnings("rawtypes")
+				List list = elem.elements();
+		    	@SuppressWarnings("rawtypes")
+				Iterator iter = list.iterator();
+		    	while(iter.hasNext()){
+		    		Element track = (Element)iter.next();
+		    		weblist.add(track.getText());
+		    	}
+		    	break;
+		    }
 		    case "localserver":
+		    {
 		    	setLocalsrv(elem.getText());
 		    	break;
+		    }
 		    case "localpath":
+		    {
 		    	setLocalpath(elem.getText());
 		    	break;
+		    }
+		    case "user":
+		    {
+		    	setUser(elem.getText());
+		    	break;
+		    }
+		    case "passwd":
+		    {
+		    	setPasswd(elem.getText());
+		    	break;
+		    }
 		    case "hrheadingid":
+		    {	
 		    	setHrheadingId(elem.getText());
 		    	break;
+		    }
 		    case "hrexceptionid":
+		    {
 		    	setHrexceptionId(elem.getText());
 		    	break;
+		    }
 		    case "swaptime":
+		    {
 		    	setSwapTime(Integer.parseInt(elem.getText()));
 		    	break;
+		    }
 		    case "delaytime":
+		    {
 		    	setDelayTime(Integer.parseInt(elem.getText()));
 		    	break;
+		    }
 		    case "refreshtme":
+		    {
 		    	setRefreshTime(Integer.parseInt(elem.getText()));
 		    	break;
+		    }
 		    case "trmaxno":
+		    {
 		    	setTr_max_no(Integer.parseInt(elem.getText()));
 		    	break;
+		    }
 		    case "recmaxno":
+		    {
 		    	setUp_max_no(Integer.parseInt(elem.getText()));
 		    	break;
-		    case "ftdailyreport":
+		    }
+		    case "ftReport":
+		    {
 		    	setFtdailyreport(elem.getText());
 		    	break;
-		    case "mtguideline":
+		    }
+		    case "mtGuide":
+		    {
 		    	setMtguideline(elem.getText());
 		    	break;
+		    }
 		    case "security:":
+		    {
 		    	setSecurity(elem.getText());
 		    	break;
-		    case "indexfile":
+		    }
+		    case "index":
+		    {
 		    	setIndexfile(elem.getText());
 		    	break;
+		    }
 		    default:
 		    	break;
 		    }
@@ -217,4 +273,29 @@ public class Resconfig {
 	public void setIndexfile(String indexfile) {
 		this.indexfile = indexfile;
 	}
+	
+	public HashSet<String> getWeblist() {
+		return weblist;
+	}
+
+	public void setWeblist(HashSet<String> weblist) {
+		this.weblist = weblist;
+	}
+	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
 }

@@ -4,7 +4,6 @@ import org.apache.ecs.html.Div;
 import org.apache.ecs.html.H1;
 import org.apache.ecs.html.H2;
 import org.apache.ecs.xhtml.p;
-import org.apache.ecs.xml.XML;
 
 import com.redarc.BaseWeb;
 
@@ -14,35 +13,6 @@ public class WebW1324 extends BaseWeb{
 		super(fileName);
 	}
 	
-	@Override
-	public String style() {
-		String styleContent = new String("" +
-				"div#wholePage{}" +
-				"div#header{height: 0px}"+
-				".track_table{" +
-				"border:#000000 solid; " +
-				"border-width:2px 0px 0px 2px;" +
-				"width: 100%; " +
-				"height: 100%" +
-				"}" +
-				".se_context{line-height: 42px;color : blue;}" + 
-				".se_context h1{font-size: 50px}" +
-				".se_context h2{font-size: 40px}" +
-				".se_context p{font-size: 25px;font-family: Arial}"
-				);
-
-		XML style = new XML("style");
-		style.setTagText(styleContent);
-		return style.toString();
-	}
-
-	@Override
-	public String script() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String body() {
 		Div w1324 = new Div();
 		w1324.setClass("se_context");
