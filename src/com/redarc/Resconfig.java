@@ -18,10 +18,11 @@ public class Resconfig {
 	private HashSet<String> weblist = new HashSet<String>();
 	private String user = "root";
 	private String passwd = "root";
-	private String ftdailyreport = "FT_L23_DAILY_REPORT.html";
-	private String mtguideline = "LMR_Main_Track_delivery_guidelines.html";
+	private String ftreport = "FT_L23_DAILY_REPORT.html";
+	private String mtguide = "LMR_Main_Track_delivery_guidelines.html";
 	private String security = "Security.html";
-	private String indexfile = "iPadUPStatus.html";
+	private String index = "iPadUPStatus.html";
+
 	private String localpath = System.getProperty("user.dir");
 	private String localsrv = "http://10.186.135.173/";
 	private Integer delayTime = 5000;
@@ -143,24 +144,24 @@ public class Resconfig {
 		    	setUp_max_no(Integer.parseInt(elem.getText()));
 		    	break;
 		    }
-		    case "ftReport":
+		    case "FTReport":
 		    {
-		    	setFtdailyreport(elem.getText());
+		    	setFtreport(elem.getText());
 		    	break;
 		    }
-		    case "mtGuide":
+		    case "MTGuide":
 		    {
-		    	setMtguideline(elem.getText());
+		    	setMtguide(elem.getText());
 		    	break;
 		    }
-		    case "security:":
+		    case "Security:":
 		    {
 		    	setSecurity(elem.getText());
 		    	break;
 		    }
-		    case "index":
+		    case "Index":
 		    {
-		    	setIndexfile(elem.getText());
+		    	setIndex(elem.getText());
 		    	break;
 		    }
 		    default:
@@ -250,30 +251,23 @@ public class Resconfig {
 	public void setTrackMap(LinkedHashMap<String, String> trackMap) {
 		this.trackMap = trackMap;
 	}
-	public String getFtdailyreport() {
-		return ftdailyreport;
+
+	public String getFtreport() {
+		return ftreport;
 	}
 
-	public void setFtdailyreport(String ftdailyreport) {
-		this.ftdailyreport = ftdailyreport;
+	public void setFtreport(String ftreport) {
+		this.ftreport = ftreport;
 	}
 
-	public String getMtguideline() {
-		return mtguideline;
+	public String getMtguide() {
+		return mtguide;
 	}
 
-	public void setMtguideline(String mtguideline) {
-		this.mtguideline = mtguideline;
+	public void setMtguide(String mtguide) {
+		this.mtguide = mtguide;
 	}
 
-	public String getIndexfile() {
-		return indexfile;
-	}
-
-	public void setIndexfile(String indexfile) {
-		this.indexfile = indexfile;
-	}
-	
 	public HashSet<String> getWeblist() {
 		return weblist;
 	}
@@ -297,5 +291,11 @@ public class Resconfig {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
+	public String getIndex() {
+		return index;
+	}
 
+	public void setIndex(String index) {
+		this.index = index;
+	}
 }

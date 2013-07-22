@@ -25,7 +25,7 @@ public class WebIndex extends BaseWeb{
 	}
 	
 	public WebIndex(String fileName){
-		super(fileName);
+		this.setFileName(fileName);
 	}
 	
 	public String body() {

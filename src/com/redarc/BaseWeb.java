@@ -70,8 +70,7 @@ public class BaseWeb {
 	    html.addElement(head);
 	    html.addElement(body);
 	    
-	    System.out.println(html.toString());
-	    WebBuilder.writeToFile(fileName, html.toString());
+	    WebBuilder.writeToFile(fileName.concat(".html"), html.toString());
 	}
 	
 	public String style() {
