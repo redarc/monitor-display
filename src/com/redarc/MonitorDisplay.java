@@ -12,7 +12,7 @@ public class MonitorDisplay {
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 
-		System.out.println("iPad parse start");
+		System.out.println("Web generator start");
 
 		WebFactory webFacotry = new WebFactory();
 		webFacotry.addWeb(new WebW1329(Resconfig.getInstance().getL3PGRmd()));
@@ -30,6 +30,6 @@ public class MonitorDisplay {
 		
 		webFacotry.build();
 		
-	    System.out.println("iPad parse end");
+	    System.out.println("Web generator end");
 	}
 }
