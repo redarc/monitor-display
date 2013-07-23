@@ -105,9 +105,8 @@ public class WebIPad{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}	    
-        	 td.addElement(new br().setTagText(tr_no + " " + trName));
-	       	 td.addElement(new br().setTagText(tr_no));
-        	 i++;
+        	td.addElement(new br().setTagText(tr_no + " " + trName));
+        	i++;
         }
         td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
         return td;

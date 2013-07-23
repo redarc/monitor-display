@@ -33,7 +33,7 @@ public class WebIndex extends BaseWeb{
 	public String head(){
 		Meta meta = new Meta();
 		meta.addAttribute("http-equiv", "refresh");
-		meta.addAttribute("content", Resconfig.getInstance().getDelayTime() * Resconfig.getInstance().getWeblist().size() * 2);
+		meta.addAttribute("content", Resconfig.getInstance().getDelayTime() * Resconfig.getInstance().getWeblist().size() * 2 / 1000);
 		return meta.toString();
 	}
 	

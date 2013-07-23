@@ -24,6 +24,7 @@ public class MonitorDisplay {
 		index.addRolllist(ipadWeb.getIpadWebSet());
 		index.addRolllist(Resconfig.getInstance().getWeblist());
 		index.setScript(index.script());
+		index.setHead(index.head());
 		
 		webFacotry.addWeb(index);
 		

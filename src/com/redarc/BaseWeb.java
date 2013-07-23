@@ -31,7 +31,6 @@ public class BaseWeb {
 		this.body = body();
 		this.script = script();
 		this.head = head();
-		System.out.println(this.getClass().getName());
 	}
 	
 	public void build(){
@@ -83,16 +82,6 @@ public class BaseWeb {
 				"text-align: left;" +
 				"vertical-align: middle" +
 				"}" +
-				".security{"+
-				"background-image : url(slide0002_image001.jpg);" +
-				"background-position: center;"+
-				"background-repeat:no-repeat;"+
-				"background-size: 1394px 1050px;"+
-				"height:1050;"+
-				"width:1394;"+
-				"}"	+	
-				".security h1{font-size: 50px}" +
-				".security h2{font-size: 40px}"+
 				".recUPTitle H2{color: blue;}" +
 				".se_context{line-height: 42px;color : blue;}" + 
 				".se_context h1{font-size: 50px}" +
