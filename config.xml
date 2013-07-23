@@ -9,9 +9,9 @@
 		</tracklist>
 	</ipadinfo>
 	<rollist>
-		<FTReport>FT_L23_DAILY_REPORT</FTReport>
+		<FTReport>L23_DAILY_ATEST_MONITOR_REPORT</FTReport>
 		<MTGuide>MT_Guideline</MTGuide>
-		<Security>security</Security>
+		<Security>security_files/slide0002</Security>
 		<L3Reminder>L3_PG_Reminder</L3Reminder>
 		<Index>index</Index>
 	</rollist>

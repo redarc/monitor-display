@@ -1,6 +1,11 @@
 package com.redarc;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Head;
 import org.apache.ecs.html.Html;
@@ -15,34 +20,9 @@ public class BaseWeb {
 	private String fileName;
 	private String style;
 	private String body;
+	private String head;
 	private String script;
-	
-	public String getStyle() {
-		return style;
-	}
-	public void setStyle(String style) {
-		this.style = style;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
-		this.body = body;
-	}
-	public String getScript() {
-		return script;
-	}
-	public void setScript(String script) {
-		this.script = script;
-	}
-	
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	
+
 	public BaseWeb(){}
 	
 	public BaseWeb(String fileName){
@@ -50,15 +30,13 @@ public class BaseWeb {
 		this.style = style();
 		this.body = body();
 		this.script = script();
-		
+		this.head = head();
 		System.out.println(this.getClass().getName());
 	}
 	
 	public void build(){
 		Head head = new Head();
-//		Meta meta = new Meta();
-//		meta.addAttribute("http-equiv", "refresh");
-//		head.addElement(meta);
+		head.addElement(getHead());
 		head.addElement(getScript());
 		head.addElement(getStyle());
 		
@@ -69,7 +47,7 @@ public class BaseWeb {
 	    html.addElement(head);
 	    html.addElement(body);
 	    
-	    WebBuilder.writeToFile(fileName.concat(".html"), html.toString());
+	    writeToFile(fileName.concat(".html"), html.toString());
 	}
 	
 	public String style() {
@@ -134,6 +112,10 @@ public class BaseWeb {
 	public String script(){
 		return null;
 	}
+	
+	public String head(){
+		return null;
+	}
 	/**
 	 * for HashSet to avoid duplicate element
 	 */
@@ -154,5 +136,61 @@ public class BaseWeb {
 	 */
 	public int hashCode(){
 		return fileName.hashCode();
+	}
+	
+    private void writeToFile(String pathName, String html){
+    	File file = new File(pathName);
+    	BufferedWriter bw = null;
+    	if(file.exists()){
+    		file.delete();
+        }
+    	try {
+    		bw = new BufferedWriter(new FileWriter(file));
+    		bw.write(html);
+    		bw.flush();
+    	}catch (IOException e){
+    		e.printStackTrace();
+    		throw(new RuntimeException());
+    	}finally{
+    		if(null != bw){
+    			try {
+    				bw.close();
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+    		}
+         }
+    }
+    
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	public String getBody() {
+		return body;
+	}
+	public void setBody(String body) {
+		this.body = body;
+	}
+	public String getScript() {
+		return script;
+	}
+	public void setScript(String script) {
+		this.script = script;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getHead() {
+		return head;
+	}
+	public void setHead(String head) {
+		this.head = head;
 	}
 }

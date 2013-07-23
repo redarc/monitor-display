@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.ecs.html.Script;
+import org.apache.ecs.vxml.Meta;
 
 import com.redarc.BaseWeb;
 import com.redarc.Resconfig;
@@ -29,6 +30,13 @@ public class WebIndex extends BaseWeb{
 		this.setFileName(fileName);
 	}
 	
+	public String head(){
+		Meta meta = new Meta();
+		meta.addAttribute("http-equiv", "refresh");
+		meta.addAttribute("content", Resconfig.getInstance().getDelayTime() * Resconfig.getInstance().getWeblist().size() * 2);
+		return meta.toString();
+	}
+	
 	public String body() {
 		return "<body></body>";
 	}
@@ -50,7 +58,6 @@ public class WebIndex extends BaseWeb{
 
 		content.append("var mywindow=window.open(address[0]);");
 		content.append("var i=1;");
-		//content.append("setInterval('page(i)',30000);");
 		content.append("setInterval('page(i)',");
 		content.append(Resconfig.getInstance().getDelayTime());
 		content.append(");");

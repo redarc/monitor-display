@@ -6,6 +6,11 @@ import org.apache.ecs.html.H2;
 
 import com.redarc.BaseWeb;
 
+/**
+ * 
+ * @author EGANYAO
+ * @deprecated
+ */
 public class WebSecurity extends BaseWeb{
 
 	public WebSecurity(String fileName){

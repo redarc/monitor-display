@@ -25,11 +25,9 @@ import com.redarc.webparser.IPadParser;
 public class WebIPad{
 
 	private Set<BaseWeb> ipadWebSet = new HashSet<BaseWeb>();
-	private LinkedHashMap<String, List<RecUP>> recUP_Map;
 	
 	public WebIPad(IPadParser iPadParser){
-		this.recUP_Map = iPadParser.parseIpad();
-		build();
+		generatorWeb(iPadParser.parseIpad());
 	}
 	
 	public Set<BaseWeb> getIpadWebSet() {
@@ -40,7 +38,7 @@ public class WebIPad{
 		this.ipadWebSet = ipadWebSet;
 	}
 	
-	public void build(){
+	public void generatorWeb(LinkedHashMap<String, List<RecUP>> recUP_Map){
 		String preKey = null;
 		int i = 0;
 		for (String key : recUP_Map.keySet()){

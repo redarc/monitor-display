@@ -5,9 +5,6 @@ import java.io.IOException;
 
 import com.redarc.lteweb.WebIPad;
 import com.redarc.lteweb.WebIndex;
-import com.redarc.lteweb.WebSecurity;
-import com.redarc.lteweb.WebW1324;
-import com.redarc.lteweb.WebW1327;
 import com.redarc.lteweb.WebW1329;
 import com.redarc.webparser.IPadParser;
 
@@ -19,9 +16,6 @@ public class MonitorDisplay {
 
 		WebFactory webFacotry = new WebFactory();
 		webFacotry.addWeb(new WebW1329(Resconfig.getInstance().getL3PGRmd()));
-		//webFacotry.addWeb(new WebW1327(Resconfig.getInstance().getFtreport()));
-		//webFacotry.addWeb(new WebW1324(Resconfig.getInstance().getMtguide()));
-		//webFacotry.addWeb(new WebSecurity(Resconfig.getInstance().getSecurity()));
 		
 		WebIPad ipadWeb = new WebIPad(new IPadParser());
 		webFacotry.addWeb(ipadWeb.getIpadWebSet());

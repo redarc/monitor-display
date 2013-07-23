@@ -7,6 +7,11 @@ import org.apache.ecs.xhtml.p;
 
 import com.redarc.BaseWeb;
 
+/**
+ * 
+ * @author EGANYAO
+ * @deprecated
+ */
 public class WebW1327 extends BaseWeb{
 	
 	public WebW1327(String fileName) {
