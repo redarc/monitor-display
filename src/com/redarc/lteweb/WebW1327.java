@@ -7,9 +7,9 @@ import org.apache.ecs.xhtml.p;
 
 import com.redarc.BaseWeb;
 
-public class WebL3PGReminder extends BaseWeb{
+public class WebW1327 extends BaseWeb{
 	
-	public WebL3PGReminder(String fileName) {
+	public WebW1327(String fileName) {
 		super(fileName);
 	}
 
@@ -23,8 +23,8 @@ public class WebL3PGReminder extends BaseWeb{
  		l3PGRmd.addElement(new p().setTagText("Maintenance TR: CorrectionProcessMaintenance_Elearning"));
  		
  		l3PGRmd.addElement(new H2().setTagText("ATest Evaluation Problem"));
- 		l3PGRmd.addElement(new p().setTagText("All RNH & UEH product show ¡°Fail¡± in ¡°Total¡± column although it seems as they executed ok"));
- 		l3PGRmd.addElement(new p().setTagText("MT are looking into the issue. Workaround is ignore ¡°Total¡± column"));
+ 		l3PGRmd.addElement(new p().setTagText("All RNH & UEH product show \"Fail\" in \"Total\" column although it seems as they executed ok"));
+ 		l3PGRmd.addElement(new p().setTagText("MT are looking into the issue. Workaround is ignore \"Total\" column"));
  		
  		l3PGRmd.addElement(new H2().setTagText("Main Track 19.12  now"));
  		l3PGRmd.addElement(new H2("Git implemented in L14A for L2, TBD. For L3"));

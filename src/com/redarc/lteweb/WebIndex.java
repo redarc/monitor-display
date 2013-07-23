@@ -1,5 +1,6 @@
 package com.redarc.lteweb;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,7 @@ public class WebIndex extends BaseWeb{
 		StringBuffer content = new StringBuffer();
 		content.append("var httpServer = 'http://");
 		content.append(Resconfig.getInstance().getLocalsrv());
+		content.append(File.separator);
 		content.append("';");
 		content.append("var address=new Array();");
 		
@@ -57,6 +59,7 @@ public class WebIndex extends BaseWeb{
 		content.append("i=0;");
 		content.append("}");
 		content.append("mywindow.location.href=address[i];");
+		content.append("i++;");
 		content.append("}");
 
 		Script script = new Script();

@@ -12,6 +12,7 @@
 		<FTReport>FT_L23_DAILY_REPORT</FTReport>
 		<MTGuide>MT_Guideline</MTGuide>
 		<Security>security</Security>
+		<L3Reminder>L3_PG_Reminder</L3Reminder>
 		<Index>index</Index>
 	</rollist>
 	<monitorsrv>
@@ -21,7 +22,7 @@
 		<localpath>/opt/3party_software/apache/htdocs</localpath> 
 	</monitorsrv>
 	<displayctl>
-		<delaytime>25</delaytime>
+		<delaytime>5000</delaytime>
 		<trmaxno>5</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>

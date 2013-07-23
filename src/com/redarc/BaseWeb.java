@@ -4,7 +4,6 @@ package com.redarc;
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Head;
 import org.apache.ecs.html.Html;
-import org.apache.ecs.html.Meta;
 import org.apache.ecs.xml.XML;
 
 /**
@@ -57,9 +56,9 @@ public class BaseWeb {
 	
 	public void build(){
 		Head head = new Head();
-		Meta meta = new Meta();
-		meta.addAttribute("http-equiv", "refresh");
-		head.addElement(meta);
+//		Meta meta = new Meta();
+//		meta.addAttribute("http-equiv", "refresh");
+//		head.addElement(meta);
 		head.addElement(getScript());
 		head.addElement(getStyle());
 		
@@ -103,7 +102,7 @@ public class BaseWeb {
 				"font-style: normal; " +
 				"font-weight: 900; " +
 				"height:30%;" +
-				"text-align: center;" +
+				"text-align: left;" +
 				"vertical-align: middle" +
 				"}" +
 				".security{"+

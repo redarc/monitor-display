@@ -18,6 +18,7 @@ public class Resconfig {
 	private HashSet<String> weblist = new HashSet<String>();
 	private String user = "root";
 	private String passwd = "root";
+	private String l3PGRmd = "L3_PG_Reminder.html";
 	private String ftreport = "FT_L23_DAILY_REPORT.html";
 	private String mtguide = "LMR_Main_Track_delivery_guidelines.html";
 	private String security = "Security.html";
@@ -85,7 +86,9 @@ public class Resconfig {
 				Iterator iter = list.iterator();
 		    	while(iter.hasNext()){
 		    		Element track = (Element)iter.next();
-		    		weblist.add(track.getText());
+		    		if(!track.getName().equals("Index")){
+		    			weblist.add(track.getText());
+		    		}
 		    	}
 		    	break;
 		    }
@@ -144,6 +147,11 @@ public class Resconfig {
 		    	setUp_max_no(Integer.parseInt(elem.getText()));
 		    	break;
 		    }
+		    case "L3Reminder":
+		    {
+		    	setL3PGRmd(elem.getText());
+		    	break;
+		    }
 		    case "FTReport":
 		    {
 		    	setFtreport(elem.getText());
@@ -154,7 +162,7 @@ public class Resconfig {
 		    	setMtguide(elem.getText());
 		    	break;
 		    }
-		    case "Security:":
+		    case "Security":
 		    {
 		    	setSecurity(elem.getText());
 		    	break;
@@ -167,8 +175,6 @@ public class Resconfig {
 		    default:
 		    	break;
 		    }
-		    
-			//System.out.println("elem: " + elem.getName() + " " + elem.getText());
 		}
 		public void visit(Attribute attr){
 			System.out.println("attr: " + attr.getName());
@@ -297,5 +303,13 @@ public class Resconfig {
 
 	public void setIndex(String index) {
 		this.index = index;
+	}
+	
+	public String getL3PGRmd() {
+		return l3PGRmd;
+	}
+
+	public void setL3PGRmd(String l3pgRmd) {
+		l3PGRmd = l3pgRmd;
 	}
 }

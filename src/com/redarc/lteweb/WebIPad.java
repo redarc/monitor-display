@@ -24,18 +24,20 @@ import com.redarc.webparser.IPadParser;
 
 public class WebIPad{
 
+	private Set<BaseWeb> ipadWebSet = new HashSet<BaseWeb>();
+	private LinkedHashMap<String, List<RecUP>> recUP_Map;
+	
+	public WebIPad(IPadParser iPadParser){
+		this.recUP_Map = iPadParser.parseIpad();
+		build();
+	}
+	
 	public Set<BaseWeb> getIpadWebSet() {
 		return ipadWebSet;
 	}
 
 	public void setIpadWebSet(Set<BaseWeb> ipadWebSet) {
 		this.ipadWebSet = ipadWebSet;
-	}
-
-	private Set<BaseWeb> ipadWebSet = new HashSet<BaseWeb>();
-	private LinkedHashMap<String, List<RecUP>> recUP_Map;
-	public WebIPad(IPadParser iPadParser){
-		this.recUP_Map = iPadParser.parseIpad();
 	}
 	
 	public void build(){
