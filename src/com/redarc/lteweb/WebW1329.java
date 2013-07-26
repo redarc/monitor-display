@@ -4,7 +4,11 @@ import org.apache.ecs.html.Div;
 import org.apache.ecs.html.H1;
 import org.apache.ecs.html.H2;
 import org.apache.ecs.xhtml.p;
-
+/**
+ * 
+ * @author EGANYAO
+ * @deprecated
+ */
 import com.redarc.BaseWeb;
 
 public class WebW1329 extends BaseWeb{

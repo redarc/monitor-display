@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import com.redarc.lteweb.WebIPad;
 import com.redarc.lteweb.WebIndex;
-import com.redarc.lteweb.WebW1329;
+import com.redarc.lteweb.WebW1330;
 import com.redarc.webparser.IPadParser;
 
 public class MonitorDisplay {
@@ -15,7 +15,7 @@ public class MonitorDisplay {
 		System.out.println("Web generator start");
 
 		WebFactory webFacotry = new WebFactory();
-		webFacotry.addWeb(new WebW1329(Resconfig.getInstance().getL3PGRmd()));
+		webFacotry.addWeb(new WebW1330(Resconfig.getInstance().getL3PGRmd()));
 		
 		WebIPad ipadWeb = new WebIPad(new IPadParser());
 		webFacotry.addWeb(ipadWeb.getIpadWebSet());
@@ -24,7 +24,6 @@ public class MonitorDisplay {
 		index.addRolllist(ipadWeb.getIpadWebSet());
 		index.addRolllist(Resconfig.getInstance().getWeblist());
 		index.setScript(index.script());
-		index.setHead(index.head());
 		
 		webFacotry.addWeb(index);
 		
