@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Head;
 import org.apache.ecs.html.Html;
+import org.apache.ecs.html.Meta;
 import org.apache.ecs.xml.XML;
 
 /**
@@ -103,7 +104,11 @@ public class BaseWeb {
 	}
 	
 	public String head(){
-		return null;
+		Meta meta = new Meta();
+		meta.addAttribute("http-equiv", "Page-Enter");
+		meta.addAttribute("content", "blendTrans(duration=2,transition=12)");
+		//return "<meta http-equiv='Page-Enter' content='blendTrans(duration=2,transition=12)'>";
+		return meta.toString();
 	}
 	/**
 	 * for HashSet to avoid duplicate element
