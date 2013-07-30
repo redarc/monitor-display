@@ -72,7 +72,7 @@ public class BaseWeb {
 				"background: Aqua" +
 				"}" +
 				".track_table td{" +
-				"padding: 5px 5px 5px 5px;" +
+				"padding: 5px 100px 5px 100px;" +
 				"border:#000000 solid; " +
 				"border-width:0px 2px 2px 0px; " +
 				"font-family: Arial; " +
@@ -83,12 +83,11 @@ public class BaseWeb {
 				"text-align: left;" +
 				"vertical-align: middle" +
 				"}" +
-				".recUPTitle H2{color: blue;}" +
-				".se_context{line-height: 42px;color : blue;}" + 
-				".se_context h1{font-size: 50px}" +
-				".se_context h2{font-size: 40px}" +
-				".se_context p{font-size: 25px;font-family: Arial}" +
-				".live-title{width: 100%; height: 100%}");
+				".recUPTitle {color: red;font-size: 30px}" +
+				".se_context{line-height: 42px;color : blue;;font-family: Arial}" + 
+				".se_context h1{font-size: 50px;font-family: Arial}" +
+				".se_context h2{font-size: 40px;font-family: Arial}" +
+				".se_context p{font-size: 25px;font-family: Arial}");
 
 		XML style = new XML("style");
 		style.setTagText(styleContent);
@@ -106,7 +105,7 @@ public class BaseWeb {
 	public String head(){
 		Meta meta = new Meta();
 		meta.addAttribute("http-equiv", "Page-Enter");
-		meta.addAttribute("content", "blendTrans(duration=2,transition=12)");
+		meta.addAttribute("content", "blendTrans(duration=" + Resconfig.getInstance().getTranstime() + ",transition=12)");
 		//return "<meta http-equiv='Page-Enter' content='blendTrans(duration=2,transition=12)'>";
 		return meta.toString();
 	}

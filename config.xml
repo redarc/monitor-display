@@ -23,7 +23,8 @@
 		<localpath>/opt/3party_software/apache/htdocs</localpath> 
 	</monitorsrv>
 	<displayctl>
-		<delaytime>5000</delaytime>
+		<delaytime>25000</delaytime>
+		<transtime>2</transtime>
 		<trmaxno>5</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>

@@ -5,9 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Div;
-import org.apache.ecs.html.H2;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -15,6 +13,7 @@ import org.apache.ecs.html.THead;
 import org.apache.ecs.html.TR;
 import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
+import org.apache.ecs.xml.XML;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
@@ -49,16 +48,12 @@ public class WebIPad{
 			}else if((0 != recUP_Map.size()%2) && (i == recUP_Map.size())){
 				BaseWeb web = new BaseWeb(key);
 				Div div_table = buildTable(recUP_Map.get(key),key);
-        		Body body = new Body();
-        		body.addElement(div_table.toString());
-        		web.setBody(body.toString());
+        		web.setBody(div_table.toString());
         		ipadWebSet.add(web);
 			}else{
 				BaseWeb web = new BaseWeb(preKey + key);
                 Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-        		Body body = new Body();
-        		body.addElement(div_table.toString());
-        		web.setBody(body.toString());
+        		web.setBody(div_table.toString());
         		ipadWebSet.add(web);
 			}
 		}
@@ -68,10 +63,10 @@ public class WebIPad{
         TD td = new TD();
         td.setVAlign("middle");
         
-        br up_title = new br();
-        up_title.setClass("recUPTitle");
-        up_title.setTagText(recUP.getTitle());
-        td.addElement(new H2().setTagText(recUP.getTitle()));
+        XML span = new XML("span");
+        span.setClass("recUPTitle");
+		span.setTagText(recUP.getTitle());
+		td.addElement(span);
         
         int i = 0;
         for(String wp_no : recUP.getWp_Set()){
