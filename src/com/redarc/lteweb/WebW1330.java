@@ -3,6 +3,7 @@ import org.apache.ecs.html.Div;
 import org.apache.ecs.html.H1;
 import org.apache.ecs.html.H2;
 import org.apache.ecs.xhtml.p;
+import org.apache.ecs.xml.XML;
 
 import com.redarc.BaseWeb;
 
@@ -28,9 +29,25 @@ public class WebW1330 extends BaseWeb{
  		
  		l3PGRmd.addElement(new H2().setTagText("RA SAM to Git"));
  		l3PGRmd.addElement(new p().setTagText("All PPC load modules built. Made initial copy of files in LRAT repo, same one used by BB+L2."));
- 		
+
  		l3PGRmd.addElement(new H2("Link reference click here"));
  		
-		return l3PGRmd.toString();
+ 		Div wholePage = new Div();
+ 		wholePage.setClass("wholePage");
+ 		wholePage.addElement(l3PGRmd);
+ 		
+		return wholePage.toString();
+	}
+	
+	public String style() {
+		String styleContent = new String("" +
+				".wholePage{background: LightBlue;width:100%;height:100% }" +
+				".se_context h1{font-size: 50px;font-family: Arial;color : LimeGreen }" +
+				".se_context h2{font-size: 40px;font-family: Arial}" +
+				".se_context p{font-size: 25px;font-family: Arial}");
+
+		XML style = new XML("style");
+		style.setTagText(styleContent);
+		return style.toString();
 	}
 }

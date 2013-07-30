@@ -129,13 +129,13 @@ public class WebIPad{
         tr_count.setClass("statistic_count");
         tr_count.setTagText(String.valueOf(recUP.getTr_Set().size()));
         
-        br static_info = new br();
-        static_info.setClass("static_info");
-        static_info.setTagText("WP : " + wp_count.toString() + 
-        		               "  TR : " + tr_count.toString() + 
-        		               "  CR : " + cr_count.toString());
-        td.addElement(static_info);
-        //td.addElement(new br().setTagText("WP_" + wp_count.toString() + " TR_" + tr_count.toString() + " CR_" + cr_count.toString()));
+        XML statistic_info = new XML("span");
+        statistic_info.setClass("statistic_info");
+        statistic_info.setTagText("WP : " + wp_count.toString() + 
+	               "  TR : " + tr_count.toString() + 
+	               "  CR : " + cr_count.toString());
+        
+        td.addElement(new br().setTagText(statistic_info.toString()));
         return td;
     }
     
