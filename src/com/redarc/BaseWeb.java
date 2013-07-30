@@ -72,7 +72,7 @@ public class BaseWeb {
 				"background: Aqua" +
 				"}" +
 				".track_table td{" +
-				"padding: 5px 100px 5px 100px;" +
+				"padding: 5px 50px 5px 100px;" +
 				"border:#000000 solid; " +
 				"border-width:0px 2px 2px 0px; " +
 				"font-family: Arial; " +

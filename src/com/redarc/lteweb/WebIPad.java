@@ -68,30 +68,38 @@ public class WebIPad{
 		span.setTagText(recUP.getTitle());
 		td.addElement(span);
         
+		//WP Content
         int i = 0;
+        StringBuffer content_wp = new StringBuffer();
         for(String wp_no : recUP.getWp_Set()){
         	 if( i > Resconfig.getInstance().getTr_max_no()){
-        		 td.addElement(new br().setTagText("etc."));
+        		 content_wp.append("etc.");
         		 break;
         	 }
-           	 td.addElement(new br().setTagText(wp_no));
+        	 content_wp.append(wp_no);
+        	 content_wp.append(" ");
         	 i++;
         }
+        td.addElement(new br().setTagText(content_wp.toString()));
         
+        //CR Content
         i = 0;
+        StringBuffer content_cr = new StringBuffer();
         for(String cr_no : recUP.getCr_Set()){
 	       	 if( i > Resconfig.getInstance().getTr_max_no()){
-	    		 td.addElement(new br().setTagText("etc."));
+	       		content_cr.append("etc.");
 	    		 break;
 	    	 }
-        	 td.addElement(new br().setTagText(cr_no));
+	       	 content_cr.append(cr_no);
+	         content_cr.append(" ");
         	 i++;
         }
         
+        //HR Content
         i = 0;
         for(String tr_no : recUP.getTr_Set()){
 	       	 if( i > Resconfig.getInstance().getTr_max_no()){
-	    		 td.addElement(new br().setTagText("etc."));
+	    		 td.addElement(new XML("span").setTagText(" etc."));
 	    		 break;
 	    	 }
 	       	 String trName = HRParser.heading(tr_no);
@@ -99,8 +107,8 @@ public class WebIPad{
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}	    
-        	td.addElement(new br().setTagText(tr_no + " " + trName));
+			}
+        	td.addElement(new br().setTagText(tr_no + "   " + trName));
         	i++;
         }
         td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
