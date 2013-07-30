@@ -108,10 +108,34 @@ public class WebIPad{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-        	td.addElement(new br().setTagText(tr_no + "   " + trName));
+            XML hrName = new XML("trName");
+            hrName.setClass("trName");
+            hrName.setTagText(trName);
+            
+        	td.addElement(new br().setTagText(tr_no + "   " + hrName.toString()));
         	i++;
         }
-        td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
+        
+        //Overrall
+        XML wp_count = new XML("span");
+        wp_count.setClass("statistic_count");
+        wp_count.setTagText(String.valueOf(recUP.getWp_Set().size()));
+        
+        XML cr_count = new XML("span");
+        cr_count.setClass("statistic_count");
+        cr_count.setTagText(String.valueOf(recUP.getCr_Set().size()));
+        
+        XML tr_count = new XML("span");
+        tr_count.setClass("statistic_count");
+        tr_count.setTagText(String.valueOf(recUP.getTr_Set().size()));
+        
+        br static_info = new br();
+        static_info.setClass("static_info");
+        static_info.setTagText("WP : " + wp_count.toString() + 
+        		               "  TR : " + tr_count.toString() + 
+        		               "  CR : " + cr_count.toString());
+        td.addElement(static_info);
+        //td.addElement(new br().setTagText("WP_" + wp_count.toString() + " TR_" + tr_count.toString() + " CR_" + cr_count.toString()));
         return td;
     }
     

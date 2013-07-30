@@ -25,7 +25,7 @@
 	<displayctl>
 		<delaytime>25000</delaytime>
 		<transtime>2</transtime>
-		<trmaxno>5</trmaxno>
+		<trmaxno>3</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>
 </rescnfog>

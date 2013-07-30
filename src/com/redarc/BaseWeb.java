@@ -78,12 +78,16 @@ public class BaseWeb {
 				"font-family: Arial; " +
 				"font-size: 24px; " +
 				"font-style: normal; " +
-				"font-weight: 900; " +
+				"font-weight: 200; " +
 				"height:30%;" +
 				"text-align: left;" +
-				"vertical-align: middle" +
+				"vertical-align: middle;" +
+				"background: PaleTurquoise" +
 				"}" +
-				".recUPTitle {color: red;font-size: 30px}" +
+				".recUPTitle {color: red;font-size: 40px}" +
+				".trName {color: green}" +
+				".static_info {color: blue; font-size: 40px}" +
+				".statistic_count {color: red}" +
 				".se_context{line-height: 42px;color : blue;;font-family: Arial}" + 
 				".se_context h1{font-size: 50px;font-family: Arial}" +
 				".se_context h2{font-size: 40px;font-family: Arial}" +
