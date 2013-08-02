@@ -108,7 +108,7 @@ public class WebIPad{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-            XML hrName = new XML("trName");
+            XML hrName = new XML("span");
             hrName.setClass("trName");
             hrName.setTagText(trName);
             
