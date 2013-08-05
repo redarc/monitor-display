@@ -114,6 +114,11 @@ public class BaseWeb {
 		Meta meta = new Meta();
 		meta.addAttribute("http-equiv", "Page-Enter");
 		meta.addAttribute("content", "blendTrans(duration=" + Resconfig.getInstance().getTranstime() + ",transition=12)");
+		
+		Meta refresh = new Meta();
+		meta.addAttribute("http-equiv", "Page-Enter");
+		meta.addAttribute("content", "blendTrans(duration=" + Resconfig.getInstance().getTranstime() + ",transition=12)");
+		
 		return meta.toString();
 	}
 	/**
