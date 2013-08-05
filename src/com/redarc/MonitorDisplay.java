@@ -30,6 +30,5 @@ public class MonitorDisplay {
 		webFacotry.build();
 		
 	    System.out.println("Web generator end");
-	    
 	}
 }
