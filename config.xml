@@ -3,8 +3,8 @@
 	<ipadinfo>
 		<mhweburl>https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=</mhweburl>
 		<tracklist>
-			<FT_88_4_4>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846</FT_88_4_4>
-			<FT_88_4_5>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830</FT_88_4_5>
+			<FT_88_4_5>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=846</FT_88_4_5>
+			<FT_88_4_4>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=830</FT_88_4_4>
 			<MT_19_10>https://lte-dailytest.rnd.ki.sw.ericsson.se/n/up/listtrack/?bucket=685</MT_19_10>
 		</tracklist>
 	</ipadinfo>
@@ -24,8 +24,9 @@
 		<localpath>/opt/3party_software/apache/htdocs</localpath> 
 	</monitorsrv>
 	<displayctl>
-		<delaytime>5000</delaytime>
-		<trmaxno>5</trmaxno>
+		<delaytime>25000</delaytime>
+		<transtime>2</transtime>
+		<trmaxno>3</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>
 </rescnfog>

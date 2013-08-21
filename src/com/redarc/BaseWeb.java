@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Head;
 import org.apache.ecs.html.Html;
+import org.apache.ecs.html.Meta;
 import org.apache.ecs.xml.XML;
 
 /**
@@ -68,26 +69,33 @@ public class BaseWeb {
 				"font-style: oblique; " +
 				"font-weight: 900; " +
 				"height:10%;" +
-				"background: Aqua" +
+				"background: YellowGreen" +
 				"}" +
 				".track_table td{" +
-				"padding: 5px 5px 5px 5px;" +
+				"padding: 5px 20px 5px 30px;" +
 				"border:#000000 solid; " +
 				"border-width:0px 2px 2px 0px; " +
 				"font-family: Arial; " +
 				"font-size: 24px; " +
 				"font-style: normal; " +
-				"font-weight: 900; " +
+				"font-weight: 200; " +
 				"height:30%;" +
 				"text-align: left;" +
-				"vertical-align: middle" +
+				"vertical-align: middle;" +
+				"background: PaleTurquoise" +
 				"}" +
-				".recUPTitle H2{color: blue;}" +
-				".se_context{line-height: 42px;color : blue;}" + 
-				".se_context h1{font-size: 50px}" +
-				".se_context h2{font-size: 40px}" +
-				".se_context p{font-size: 25px;font-family: Arial}" +
-				".live-title{width: 100%; height: 100%}");
+				".recUPTitle {color: red;font-size: 40px}" +
+				".trName {color: green}" +
+				".statistic_info {color: blue; font-size: 35px}" +
+				".statistic_count {color: red}" +
+				".se_context{"+ 
+				"line-height: 42px;" +
+				"color : blue;"	+
+				"font-family: Arial" +
+				"}" + 
+				".se_context h1{font-size: 50px;font-family: Arial;color : LimeGreen }" +
+				".se_context h2{font-size: 40px;font-family: Arial}" +
+				".se_context p{font-size: 25px;font-family: Arial}");
 
 		XML style = new XML("style");
 		style.setTagText(styleContent);
@@ -103,7 +111,15 @@ public class BaseWeb {
 	}
 	
 	public String head(){
-		return null;
+		Meta meta = new Meta();
+		meta.addAttribute("http-equiv", "Page-Enter");
+		meta.addAttribute("content", "blendTrans(duration=" + Resconfig.getInstance().getTranstime() + ",transition=12)");
+		
+		Meta refresh = new Meta();
+		meta.addAttribute("http-equiv", "Page-Enter");
+		meta.addAttribute("content", "blendTrans(duration=" + Resconfig.getInstance().getTranstime() + ",transition=12)");
+		
+		return meta.toString();
 	}
 	/**
 	 * for HashSet to avoid duplicate element

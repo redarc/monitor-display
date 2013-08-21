@@ -22,13 +22,14 @@ public class Resconfig {
 	private String ftreport = "FT_L23_DAILY_REPORT.html";
 	private String mtguide = "LMR_Main_Track_delivery_guidelines.html";
 	private String security = "Security.html";
-	private String index = "iPadUPStatus.html";
+	private String index = "index.html";
 
 	private String localpath = System.getProperty("user.dir");
-	private String localsrv = "http://10.186.135.173/";
+	private String localsrv = "10.186.135.173";
 	private Integer delayTime = 5000;
 	private Integer swapTime = 2000;
 	private Integer refreshTime = 10000;
+	private int transtime = 2;
 	private int tr_max_no = 5;
 	private int up_max_no = 3;
 	private String mhweburl = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
@@ -172,6 +173,11 @@ public class Resconfig {
 		    	setIndex(elem.getText());
 		    	break;
 		    }
+		    case "transtime":
+		    {
+		    	setTranstime(elem.getText());
+		    	break;
+		    }
 		    default:
 		    	break;
 		    }
@@ -311,5 +317,12 @@ public class Resconfig {
 
 	public void setL3PGRmd(String l3pgRmd) {
 		l3PGRmd = l3pgRmd;
+	}
+	public int getTranstime() {
+		return transtime;
+	}
+
+	public void setTranstime(String transtime) {
+		this.transtime = Integer.parseInt(transtime);
 	}
 }

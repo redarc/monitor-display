@@ -5,9 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.ecs.html.Body;
 import org.apache.ecs.html.Div;
-import org.apache.ecs.html.H2;
 import org.apache.ecs.html.TBody;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TH;
@@ -15,6 +13,7 @@ import org.apache.ecs.html.THead;
 import org.apache.ecs.html.TR;
 import org.apache.ecs.html.Table;
 import org.apache.ecs.xhtml.br;
+import org.apache.ecs.xml.XML;
 
 import com.redarc.BaseWeb;
 import com.redarc.RecUP;
@@ -49,16 +48,12 @@ public class WebIPad{
 			}else if((0 != recUP_Map.size()%2) && (i == recUP_Map.size())){
 				BaseWeb web = new BaseWeb(key);
 				Div div_table = buildTable(recUP_Map.get(key),key);
-        		Body body = new Body();
-        		body.addElement(div_table.toString());
-        		web.setBody(body.toString());
+        		web.setBody(div_table.toString());
         		ipadWebSet.add(web);
 			}else{
 				BaseWeb web = new BaseWeb(preKey + key);
                 Div div_table = buildTable(recUP_Map.get(key),recUP_Map.get(preKey), key, preKey);
-        		Body body = new Body();
-        		body.addElement(div_table.toString());
-        		web.setBody(body.toString());
+        		web.setBody(div_table.toString());
         		ipadWebSet.add(web);
 			}
 		}
@@ -68,35 +63,43 @@ public class WebIPad{
         TD td = new TD();
         td.setVAlign("middle");
         
-        br up_title = new br();
-        up_title.setClass("recUPTitle");
-        up_title.setTagText(recUP.getTitle());
-        td.addElement(new H2().setTagText(recUP.getTitle()));
+        XML span = new XML("span");
+        span.setClass("recUPTitle");
+		span.setTagText(recUP.getTitle());
+		td.addElement(span);
         
+		//WP Content
         int i = 0;
+        StringBuffer content_wp = new StringBuffer();
         for(String wp_no : recUP.getWp_Set()){
         	 if( i > Resconfig.getInstance().getTr_max_no()){
-        		 td.addElement(new br().setTagText("etc."));
+        		 content_wp.append("etc.");
         		 break;
         	 }
-           	 td.addElement(new br().setTagText(wp_no));
+        	 content_wp.append(wp_no);
+        	 content_wp.append(" ");
         	 i++;
         }
+        td.addElement(new br().setTagText(content_wp.toString()));
         
+        //CR Content
         i = 0;
+        StringBuffer content_cr = new StringBuffer();
         for(String cr_no : recUP.getCr_Set()){
 	       	 if( i > Resconfig.getInstance().getTr_max_no()){
-	    		 td.addElement(new br().setTagText("etc."));
+	       		content_cr.append("etc.");
 	    		 break;
 	    	 }
-        	 td.addElement(new br().setTagText(cr_no));
+	       	 content_cr.append(cr_no);
+	         content_cr.append(" ");
         	 i++;
         }
         
+        //HR Content
         i = 0;
         for(String tr_no : recUP.getTr_Set()){
 	       	 if( i > Resconfig.getInstance().getTr_max_no()){
-	    		 td.addElement(new br().setTagText("etc."));
+	    		 td.addElement(new XML("span").setTagText(" etc."));
 	    		 break;
 	    	 }
 	       	 String trName = HRParser.heading(tr_no);
@@ -104,11 +107,35 @@ public class WebIPad{
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}	    
-        	td.addElement(new br().setTagText(tr_no + " " + trName));
+			}
+            XML hrName = new XML("span");
+            hrName.setClass("trName");
+            hrName.setTagText(trName);
+            
+        	td.addElement(new br().setTagText(tr_no + "   " + hrName.toString()));
         	i++;
         }
-        td.addElement(new br().setTagText("WP_" + recUP.getWp_Set().size() + " TR_" + recUP.getTr_Set().size() + " CR_" + recUP.getCr_Set().size()));
+        
+        //Overrall
+        XML wp_count = new XML("span");
+        wp_count.setClass("statistic_count");
+        wp_count.setTagText(String.valueOf(recUP.getWp_Set().size()));
+        
+        XML cr_count = new XML("span");
+        cr_count.setClass("statistic_count");
+        cr_count.setTagText(String.valueOf(recUP.getCr_Set().size()));
+        
+        XML tr_count = new XML("span");
+        tr_count.setClass("statistic_count");
+        tr_count.setTagText(String.valueOf(recUP.getTr_Set().size()));
+        
+        XML statistic_info = new XML("span");
+        statistic_info.setClass("statistic_info");
+        statistic_info.setTagText("WP : " + wp_count.toString() + 
+	               "  TR : " + tr_count.toString() + 
+	               "  CR : " + cr_count.toString());
+        
+        td.addElement(new br().setTagText(statistic_info.toString()));
         return td;
     }
     
