@@ -17,21 +17,22 @@ public class WebW1333 extends BaseWeb{
 	public String body() {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
- 		l3PGRmd.addElement(new H1("L3 PG Reminders-w33"));
+ 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1333"));
  		
- 		l3PGRmd.addElement(new H2("LMR delivery Guideline update"));
+ 		l3PGRmd.addElement(new H2("FreqInfo refactoring on L14A"));
+ 		l3PGRmd.addElement(new H2("Implode registers on L14A"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;To reduce waste a number of registers will be merged together"));
+ 		
+ 		l3PGRmd.addElement(new H2("19.14 and 19.15.1 open for delivery again"));
  		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B Track 19.14-For UM5 & UM5.1"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Only UM5 blockers allowed in. "));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UM5.1 blockers needs to wait until we have the UM5 candidate secured. "));
  		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B Track 19.15-For IP1"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Open for other L13B content "));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;19.14 GA-B TRs only(all deliveries in 19.14 needs to be delivered in 19.15.1 as well)"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;19.15.1 open for other L13B deliveries(no more floating baseline: all deliveries in 19.15.1 need to be delivered in 21.0 as well)(i.e. no more deliveries to 19.15)"));
  		
- 		l3PGRmd.addElement(new H2("RAST doesn't work"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;RAST always failed in 19.14 and 21.x. Gangqiang WANG is checking with MT."));
+ 		l3PGRmd.addElement(new H2("RSARTE 8.5.1 CP1 was deployed"));
  		
- 		l3PGRmd.addElement(new H2("MCT Legacy problems tonight as well due to lmsim problems"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;legacy issues seen tonight (failing at init_per_suite) are taken care of by the GTE team."));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;If you'd like to run now you can always use /proj/ltegte/release/gte-19.14.3211 meanwhile."));
+ 		l3PGRmd.addElement(new H2("Link reference click here"));
+ 		
  		Div wholePage = new Div();
  		wholePage.setClass("wholePage");
  		wholePage.addElement(l3PGRmd);
