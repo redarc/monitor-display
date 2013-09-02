@@ -17,19 +17,27 @@ public class WebW1333 extends BaseWeb{
 	public String body() {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
- 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1333"));
+ 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1334"));
  		
- 		l3PGRmd.addElement(new H2("FreqInfo refactoring on L14A"));
- 		l3PGRmd.addElement(new H2("Implode registers on L14A"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;To reduce waste a number of registers will be merged together"));
+ 		l3PGRmd.addElement(new H2("Dependency_multiatest version 1.13 is now available"));
+ 		l3PGRmd.addElement(new H2("System const still valid in ClearCase"));
+ 		l3PGRmd.addElement(new H2("Main track: Still 21.0. Two issues prevent us from stepping up to 21.1."));
+ 		l3PGRmd.addElement(new H2("MT UEH PG refresh, but RNH PG still keep as before:"));
  		
- 		l3PGRmd.addElement(new H2("19.14 and 19.15.1 open for delivery again"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B Track 19.14-For UM5 & UM5.1"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B Track 19.15-For IP1"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;19.14 GA-B TRs only(all deliveries in 19.14 needs to be delivered in 19.15.1 as well)"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;19.15.1 open for other L13B deliveries(no more floating baseline: all deliveries in 19.15.1 need to be delivered in 21.0 as well)(i.e. no more deliveries to 19.15)"));
  		
- 		l3PGRmd.addElement(new H2("RSARTE 8.5.1 CP1 was deployed"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;PG In:"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joakim Hellsten"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anders Westroos"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fredrik Hultin N"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fredrik Jonsson F "));
+ 		
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;PG Out:"));
+ 		
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lennart Oscarsson"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Morgan Bergkvist"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joakim Leuhusen"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Erik Borgenvik (At End of September) "));
+ 		
  		
  		l3PGRmd.addElement(new H2("Link reference click here"));
  		
