@@ -17,29 +17,17 @@ public class WebW1333 extends BaseWeb{
 	public String body() {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
- 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1334"));
+ 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1336"));
  		
- 		l3PGRmd.addElement(new H2("Dependency_multiatest version 1.13 is now available"));
- 		l3PGRmd.addElement(new H2("System const still valid in ClearCase"));
- 		l3PGRmd.addElement(new H2("Main track: Still 21.0. Two issues prevent us from stepping up to 21.1."));
- 		l3PGRmd.addElement(new H2("MT UEH PG refresh, but RNH PG still keep as before:"));
+ 		l3PGRmd.addElement(new H2("L13B GA"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B FDD and TDD have reached GA status as planned today September 5,2013 "));
  		
+ 		l3PGRmd.addElement(new H2("RAST Alternative is ready for use"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;RAST Alternative running is same as RAST just with different config file under '/proj/lterbsSwdi/usr/lterbsnj'."));
  		
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;PG In:"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joakim Hellsten"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anders Westroos"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fredrik Hultin N"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fredrik Jonsson F "));
+ 		l3PGRmd.addElement(new H2("L14A is open, SAM/C&O are OK to deliver"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Link reference click here"));
  		
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;PG Out:"));
- 		
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lennart Oscarsson"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Morgan Bergkvist"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joakim Leuhusen"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Erik Borgenvik (At End of September) "));
- 		
- 		
- 		l3PGRmd.addElement(new H2("Link reference click here"));
  		
  		Div wholePage = new Div();
  		wholePage.setClass("wholePage");
