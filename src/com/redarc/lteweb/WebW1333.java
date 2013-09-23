@@ -17,23 +17,24 @@ public class WebW1333 extends BaseWeb{
 	public String body() {
  		Div l3PGRmd = new Div();
  		l3PGRmd.setClass("se_context");
- 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1337"));
+ 		l3PGRmd.addElement(new H1("L3 PG Reminders-W1338"));
  		
- 		l3PGRmd.addElement(new H2("Removal of LDN in RAC ,avoid using LDN in RAC"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;LDN in signals is replaced with FroRef,parentRef"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;LDN removed in most RNH and UEH code,should not be used in cellLM, mostly removed in centralLM (still used in some OMF blocks)"));
- 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;L13B FDD and TDD have reached GA status as planned today September 5,2013 "));
+ 		l3PGRmd.addElement(new H2("ALWAYS check mail from Kim Grondin to secure delivery stop or not with subject as "));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;LDN in signals is replaced with FroRef,parentRef"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;LDN removed in most RNH and UEH code,should not be used in cellLM, mostly removed in centralLM (still used in some OMF blocks)"));
+ 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;INFO:LMR Main Track L14A delivery guidelines"));
  		
- 		l3PGRmd.addElement(new H2("Delivery request rules"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;FOR WPs"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Always email TO:LTE RBS Integration Delivery Request (EMC)"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UEH area: still to mail group UEH Delivery Coordination"));
- 		
- 		
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;FOR TRs"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14A RNH TRs are allowed to be delivered without sending delivery requests (except UEH)! But not if there is a complete delivery stop"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14A UEH TRs need to send delivery request to UEH Delivery Cooridnation"));
- 		l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13A TRs need to propose an answer in MHWeb and get approval from mDPM ; 13B TRs deliver to IP2 after checking with Kim Augustsson"));
+ 		l3PGRmd.addElement(new H2("L3 Delivery check are grouping to checklist by local PG"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;FOR WPs"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Always email TO:LTE RBS Integration Delivery Request (EMC)"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UEH area: still to mail group UEH Delivery Coordination"));
+ 		l3PGRmd.addElement(new H2("eDC guideline updated by INT team, recommended UP shown in RBS INT home page"));
+ 		l3PGRmd.addElement(new H2("dependency_multiatest 1.14 released, exclude already delivered files"));
+ 		l3PGRmd.addElement(new H2("Link refer to here"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;FOR TRs"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14A RNH TRs are allowed to be delivered without sending delivery requests (except UEH)! But not if there is a complete delivery stop"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14A UEH TRs need to send delivery request to UEH Delivery Cooridnation"));
+ 		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13A TRs need to propose an answer in MHWeb and get approval from mDPM ; 13B TRs deliver to IP2 after checking with Kim Augustsson"));
  		//l3PGRmd.addElement(new p().setTagText("&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Link reference click here"));
  		
  		
