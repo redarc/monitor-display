@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.redarc.lteweb.WebIPad;
 import com.redarc.lteweb.WebIndex;
 import com.redarc.lteweb.WebW1333;
+import com.redarc.webfetcher.WebFetcher;
 import com.redarc.webparser.IPadParser;
 
 public class MonitorDisplay {
@@ -13,6 +14,8 @@ public class MonitorDisplay {
 
 		System.out.println("Web generator start");
 
+		WebFetcher.download(Resconfig.getInstance().getMtQAstatus(), Resconfig.getInstance().getMtQAstatusurl());
+		
 		WebFactory webFacotry = new WebFactory();
 		webFacotry.addWeb(new WebW1333(Resconfig.getInstance().getL3PGRmd()));
 		

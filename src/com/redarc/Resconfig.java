@@ -22,6 +22,7 @@ public class Resconfig {
 	private String ftreport = "FT_L23_DAILY_REPORT.html";
 	private String mtguide = "LMR_Main_Track_delivery_guidelines.html";
 	private String security = "Security.html";
+	private String mtQAstatus;
 	private String index = "index.html";
 
 	private String localpath = System.getProperty("user.dir");
@@ -33,6 +34,7 @@ public class Resconfig {
 	private int tr_max_no = 5;
 	private int up_max_no = 3;
 	private String mhweburl = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
+	private String mtQAstatusurl;
 	private String hrheadingId = "frm_field_heading_j_id_9v_notetextEditMode";
 	private String hrexceptionId = "compAjaxExceptionDialog_msgDialogPanel";
 	private LinkedHashMap<String,String> trackMap = new LinkedHashMap<String,String>();
@@ -67,6 +69,11 @@ public class Resconfig {
 		    	setMhweburl(elem.getText());
 		    	break;
 		    }
+		    case "mtQAstatus" :
+		    {
+		    	setMtQAstatusurl(elem.getText());
+		    	break;
+		    }	
 		    case "tracklist" :
 		    {
 		    	@SuppressWarnings("rawtypes")
@@ -168,6 +175,11 @@ public class Resconfig {
 		    	setSecurity(elem.getText());
 		    	break;
 		    }
+		    case "MTQA_Status":
+		    {
+		    	setMtQAstatus(elem.getText());
+		    	break;
+		    }
 		    case "Index":
 		    {
 		    	setIndex(elem.getText());
@@ -185,6 +197,22 @@ public class Resconfig {
 		public void visit(Attribute attr){
 			System.out.println("attr: " + attr.getName());
 		}
+	}
+	
+	public String getMtQAstatus() {
+		return mtQAstatus;
+	}
+
+	public void setMtQAstatus(String mtQAstatus) {
+		this.mtQAstatus = mtQAstatus;
+	}
+	
+	public String getMtQAstatusurl() {
+		return mtQAstatusurl;
+	}
+
+	public void setMtQAstatusurl(String mtQAstatusurl) {
+		this.mtQAstatusurl = mtQAstatusurl;
 	}
 	
 	public String getSecurity() {
