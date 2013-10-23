@@ -110,7 +110,11 @@ public class WebIPad{
 			}
             XML hrName = new XML("span");
             hrName.setClass("trName");
-            hrName.setTagText(trName);
+            if(null != trName){
+            	hrName.setTagText(trName);
+            }else{
+            	hrName.setTagText("NULL");
+            }
             
         	td.addElement(new br().setTagText(tr_no + "   " + hrName.toString()));
         	i++;

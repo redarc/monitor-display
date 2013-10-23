@@ -35,7 +35,7 @@ public class Resconfig {
 	private int up_max_no = 3;
 	private String mhweburl = "https://mhweb.ericsson.se/TREditWeb/faces/tredit/tredit.xhtml?eriref=";
 	private String mtQAstatusurl;
-	private String hrheadingId = "frm_field_heading_j_id_9v_notetextEditMode";
+	private String hrheadingId = "frm_field_heading_j_id_a2_notetextEditMode";
 	private String hrexceptionId = "compAjaxExceptionDialog_msgDialogPanel";
 	private LinkedHashMap<String,String> trackMap = new LinkedHashMap<String,String>();
 	private Document doc;

@@ -31,4 +31,7 @@
 		<trmaxno>3</trmaxno>
 	    <recmaxno>3</recmaxno>
 	</displayctl>
+	<trinfo>
+	    <hrheadingId>frm_field_heading_j_id_a2_notetextEditMode</hrheadingId>
+	</trinfo>
 </rescnfog>
