@@ -116,6 +116,9 @@ public class WebIPad{
             	hrName.setTagText("NULL");
             }
             
+            System.out.println("tr_no = " + tr_no );
+            System.out.println(" hrName = " + hrName.toString());
+            
         	td.addElement(new br().setTagText(tr_no + "   " + hrName.toString()));
         	i++;
         }
