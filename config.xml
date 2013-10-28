@@ -10,13 +10,15 @@
 		</tracklist>
 	</ipadinfo>
 	<rollist>
-		<FTReport>L23_DAILY_ATEST_MONITOR_REPORT</FTReport>
+	
 		<MTGuide>MT_Guideline</MTGuide>
 		<Security>security_files/slide0002</Security>
 		<L3Reminder>L3_PG_Reminder</L3Reminder>
 	    <MBB_TR>TR_MBB</MBB_TR>
 	    <MTGuide_L14A>MT_Guideline_L14A</MTGuide_L14A>
-	   
+	    <Atest_MT>Atest_MT</Atest_MT>
+	    <Atest_88.7>Atest_88.7</Atest_88.7>
+	    <RA_SAM>RA_SAM</RA_SAM>
 		<Index>index</Index>
 	</rollist>
 	<monitorsrv>
